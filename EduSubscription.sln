@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EduSubscription.Api", "EduSubscription.Api\EduSubscription.Api.csproj", "{3084256A-7C05-4030-9109-50ADB62E694D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EduSubscription.Domain", "EduSubscription.Domain\EduSubscription.Domain.csproj", "{2B913396-B69F-4BEF-A5D1-155B44F220EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EduSubscription.Api", "EduSubscription.Api\EduSubscription.Api.csproj", "{3EB5C787-F84F-4B5D-97F2-497E96C6AC69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +10,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3084256A-7C05-4030-9109-50ADB62E694D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3084256A-7C05-4030-9109-50ADB62E694D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3084256A-7C05-4030-9109-50ADB62E694D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3084256A-7C05-4030-9109-50ADB62E694D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B913396-B69F-4BEF-A5D1-155B44F220EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B913396-B69F-4BEF-A5D1-155B44F220EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B913396-B69F-4BEF-A5D1-155B44F220EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B913396-B69F-4BEF-A5D1-155B44F220EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EB5C787-F84F-4B5D-97F2-497E96C6AC69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EB5C787-F84F-4B5D-97F2-497E96C6AC69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EB5C787-F84F-4B5D-97F2-497E96C6AC69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EB5C787-F84F-4B5D-97F2-497E96C6AC69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
