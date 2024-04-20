@@ -20,7 +20,7 @@ public abstract class Entity : IEquatable<Guid>
     /// Raises a new domain event into the entity.
     /// </summary>
     /// <param name="domainEvent"></param>
-    public void Raise(IDomainEvent domainEvent)
+    protected void Raise(IDomainEvent domainEvent)
     {
         _events.Add(domainEvent);
     }

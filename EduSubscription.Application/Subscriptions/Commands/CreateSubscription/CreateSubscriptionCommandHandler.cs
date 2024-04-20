@@ -25,10 +25,7 @@ public class CreateSubscriptionCommandHandler : IRequestHandler<CreateSubscripti
         {
             return Result.Fail<SubscriptionCreatedViewModel>(SubscriptionsErrors.Plan.PlanNotFound);
         }
-        var today = DateTime.Now;
-        var start = new DateOnly(today.Year, today.Month, today.Day);
-        var end = start.AddMonths(plan.DurationInMonths);
-        var subscription = new Subscription(ESubscriptionStatus.Pending, start, end, plan.Id);
+        var subscription = Subscription.Create(plan.Id);
         await _unitOfWork.SubscriptionRepository.Add(subscription);
         await _unitOfWork.Complete();
         return Result.Ok(new SubscriptionCreatedViewModel(subscription.Id));
