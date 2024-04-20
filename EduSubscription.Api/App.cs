@@ -15,6 +15,7 @@ public abstract class App
         builder.Services.AddScoped<ExceptionHandler>();
         builder.Services.AddControllers();
         builder.Services.AddPersistence();
+        builder.Services.AddFluentValidation();
         builder.Services.AddMediator();
         var app = builder.Build();
         app.UseMiddleware<ExceptionHandler>();
