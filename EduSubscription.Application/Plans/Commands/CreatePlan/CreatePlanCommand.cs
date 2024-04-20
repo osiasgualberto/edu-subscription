@@ -1,10 +1,10 @@
-﻿using EduSubscription.Application.Subscriptions.Views;
+﻿using EduSubscription.Application.Plans.Views;
 using EduSubscription.Primitives;
 using MediatR;
 
-namespace EduSubscription.Application.Subscriptions.Commands.CreatePlan;
+namespace EduSubscription.Application.Plans.Commands.CreatePlan;
 
-public class CreatePlanCommand : IRequest<Result<SubscriptionPlanCreatedViewModel>>
+public class CreatePlanCommand : IRequest<Result<PlanCreatedViewModel>>
 {
     public CreatePlanCommand(string description, int durationInMonths)
     {

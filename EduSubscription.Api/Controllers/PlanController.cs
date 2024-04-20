@@ -1,5 +1,7 @@
 ﻿using EduSubscription.Api.Abstractions;
-using EduSubscription.Application.Subscriptions.Commands.CreatePlan;
+using EduSubscription.Application.Plans.Commands.CreatePlan;
+using EduSubscription.Application.Plans.Queries.GetAllPlans;
+using EduSubscription.Application.Subscriptions.Queries.GetAllSubscriptions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +17,7 @@ public class PlanController : ApiController
     }
 
     private readonly IMediator _mediator;
-    
+
     [HttpPost(ApiRoutes.Plan.BasePlan)]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -23,5 +25,13 @@ public class PlanController : ApiController
     {
         var result = await _mediator.Send(createPlanCommand);
         return result.IsSuccess ? CreatedAtAction(nameof(PostPlan), value: result.Value) : BadRequest(result.Error);
+    }
+    
+    [HttpGet(ApiRoutes.Plan.BasePlan)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetPlans()
+    {
+        var view = await _mediator.Send(new GetAllPlansQuery());
+        return Ok(view);
     }
 }

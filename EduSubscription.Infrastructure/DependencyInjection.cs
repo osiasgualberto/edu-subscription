@@ -19,11 +19,11 @@ public static class DependencyInjection
                 var appDbContextOptions =
                     provider.GetService(typeof(IOptions<AppDbContextOptions>)) as IOptions<AppDbContextOptions>;
                 if (appDbContextOptions is null) return;
-                Console.WriteLine(appDbContextOptions.Value.ConnectionString);
                 builder.UseSqlServer(appDbContextOptions.Value.ConnectionString);
             }))
             .AddScoped<IUnitOfWork, AppUnitOfWork>()
-            .AddScoped<ISubscriptionRepository, SubscriptionRepository>();
+            .AddScoped<ISubscriptionRepository, SubscriptionRepository>()
+            .AddScoped<IPlanRepository, PlanRepository>();
         return services;
     }
 

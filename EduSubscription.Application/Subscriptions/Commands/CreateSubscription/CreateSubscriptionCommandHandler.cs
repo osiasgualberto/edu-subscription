@@ -20,7 +20,7 @@ public class CreateSubscriptionCommandHandler : IRequestHandler<CreateSubscripti
 
     public async Task<Result<SubscriptionCreatedViewModel>> Handle(CreateSubscriptionCommand request, CancellationToken cancellationToken)
     {
-        var plan = await _unitOfWork.SubscriptionRepository.GetPlanById(request.IdPlan);
+        var plan = await _unitOfWork.PlanRepository.ReadById(request.IdPlan);
         if (plan is null)
         {
             return Result.Fail<SubscriptionCreatedViewModel>(SubscriptionsErrors.Plan.PlanNotFound);
@@ -28,10 +28,9 @@ public class CreateSubscriptionCommandHandler : IRequestHandler<CreateSubscripti
         var today = DateTime.Now;
         var start = new DateOnly(today.Year, today.Month, today.Day);
         var end = start.AddMonths(plan.DurationInMonths);
-        // TODO: verificar como fazer para adicionar o pagamento antes de realizar a criação da assinatura.
         var subscription = new Subscription(ESubscriptionStatus.Pending, start, end, plan.Id);
         await _unitOfWork.SubscriptionRepository.Add(subscription);
         await _unitOfWork.Complete();
-        return Result.Ok(new SubscriptionCreatedViewModel(subscription.Id, subscription.IdPlan, EPaymentStatus.Pending));
+        return Result.Ok(new SubscriptionCreatedViewModel(subscription.Id));
     }
 }

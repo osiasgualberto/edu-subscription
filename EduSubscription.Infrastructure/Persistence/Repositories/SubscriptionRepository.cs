@@ -15,9 +15,9 @@ public class SubscriptionRepository : ISubscriptionRepository
         _appDbContext = appDbContext;
     }
 
-    public async Task Add(Subscription entity)
+    public async Task Add(Subscription plan)
     {
-        await _appDbContext.Subscriptions.AddAsync(entity);
+        await _appDbContext.Subscriptions.AddAsync(plan);
     }
 
     public Task<List<Subscription>> ReadAll()
@@ -25,23 +25,8 @@ public class SubscriptionRepository : ISubscriptionRepository
         return _appDbContext.Subscriptions.ToListAsync();
     }
 
-    public async Task AddPlan(Plan? plan)
+    public Task<Subscription?> ReadById(Guid id)
     {
-        await _appDbContext.Plans.AddAsync(plan);
-    }
-
-    public async Task AddPayment(Payment payment)
-    {
-        await _appDbContext.Payments.AddAsync(payment);
-    }
-
-    public async Task<Plan?> GetPlanById(Guid id)
-    {
-        return await _appDbContext.Plans.SingleOrDefaultAsync(o => o.Id == id);
-    }
-
-    public async Task<Payment?> GetPayment(Guid id)
-    {
-        return await _appDbContext.Payments.SingleOrDefaultAsync(o => o.Id == id);
+        return _appDbContext.Subscriptions.SingleOrDefaultAsync(o => o.Id == id);
     }
 }

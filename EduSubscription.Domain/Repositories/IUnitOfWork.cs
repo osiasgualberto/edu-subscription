@@ -5,6 +5,7 @@
 /// </summary>
 public interface IUnitOfWork
 {
+    public IPlanRepository PlanRepository { get; set; }
     public ISubscriptionRepository SubscriptionRepository { get; set; }
     /// <summary>
     /// Completes a transaction.

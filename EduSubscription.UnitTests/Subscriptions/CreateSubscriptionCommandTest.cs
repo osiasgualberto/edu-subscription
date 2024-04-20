@@ -24,7 +24,7 @@ public class CreateSubscriptionCommandTest
         // Arrange
         _unitOfWorkMock
             .SubscriptionRepository
-            .GetPlanById(Arg.Any<Guid>())
+            .ReadById(Arg.Any<Guid>())
             .ReturnsNull();
         var command = new CreateSubscriptionCommand(Arg.Any<Guid>());
         var handler = new CreateSubscriptionCommandHandler(_unitOfWorkMock);

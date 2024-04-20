@@ -14,4 +14,8 @@
       <ProjectReference Include="..\EduSubscription.Domain\EduSubscription.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Plans\Commands\" />
+    </ItemGroup>
+
 </Project>

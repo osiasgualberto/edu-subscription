@@ -1,4 +1,6 @@
-﻿using EduSubscription.Application.Subscriptions.Views;
+﻿using EduSubscription.Application.Plans.Views;
+using EduSubscription.Application.Subscriptions.Views;
+using EduSubscription.Core.Subscriptions;
 using MediatR;
 
 namespace EduSubscription.Application.Subscriptions.Queries.GetAllSubscriptions;

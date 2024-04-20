@@ -1,11 +1,7 @@
-﻿using System.Net;
-using EduSubscription.Api.Abstractions;
-using EduSubscription.Application.Subscriptions.Commands.CreatePlan;
+﻿using EduSubscription.Api.Abstractions;
 using EduSubscription.Application.Subscriptions.Commands.CreateSubscription;
 using EduSubscription.Application.Subscriptions.Queries.GetAllSubscriptions;
-using EduSubscription.Application.Subscriptions.Views;
 using MediatR;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EduSubscription.Api.Controllers;
