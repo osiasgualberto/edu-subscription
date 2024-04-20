@@ -1,0 +1,6 @@
+﻿POST http://localhost:5218/api/subscriptions
+Content-Type: application/json
+
+{
+  "idPlan": "8C39D029-2418-4DBB-840C-5EE93B8C10EA"
+}

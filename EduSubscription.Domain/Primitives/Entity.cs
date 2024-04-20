@@ -7,8 +7,8 @@ namespace EduSubscription.Primitives;
 /// </summary>
 public abstract class Entity : IEquatable<Guid>
 {
-    public Guid Id { get; protected set; }
-
+    
+    public Guid Id { get; protected set; } = Guid.NewGuid();
     private List<IDomainEvent> _events = new();
     public List<IDomainEvent> Events
     {

@@ -1,0 +1,7 @@
+﻿POST http://localhost:5218/api/subscriptions/plans
+Content-Type: application/json
+
+{
+  "description": "PLANO MENTORIA .NET START 1 ANO",
+  "durationInMonths": 12
+}

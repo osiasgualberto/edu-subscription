@@ -5,8 +5,6 @@
 
 # dotenv files
 .env
-EduSubscription.Api/appsettings.Development.json
-EduSubscription.Api/appsettings.json
 
 # User-specific files
 *.rsuser

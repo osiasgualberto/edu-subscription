@@ -7,8 +7,20 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Mediator.Abstractions" Version="3.0.0-preview.27" />
+        <PackageReference Include="MediatR" Version="12.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.3"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0-preview.3.24172.4">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\EduSubscription.Application\EduSubscription.Application.csproj" />
+      <ProjectReference Include="..\EduSubscription.Domain\EduSubscription.Domain.csproj" />
+      <ProjectReference Include="..\EduSubscription.Infrastructure\EduSubscription.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>
