@@ -1,4 +1,4 @@
-﻿namespace EduSubscription.Subscriptions.Enumerations;
+﻿namespace EduSubscription.Core.Payments.Enumerations;
 
 public enum EPaymentStatus
 {

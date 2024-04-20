@@ -1,7 +1,7 @@
 ﻿using EduSubscription.Application.Subscriptions.Views;
+using EduSubscription.Core.Plans;
 using EduSubscription.Primitives;
 using EduSubscription.Repositories;
-using EduSubscription.Subscriptions;
 using MediatR;
 
 namespace EduSubscription.Application.Subscriptions.Commands.CreatePlan;

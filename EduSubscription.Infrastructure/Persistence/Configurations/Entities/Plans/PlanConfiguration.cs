@@ -1,8 +1,8 @@
-﻿using EduSubscription.Subscriptions;
+﻿using EduSubscription.Core.Plans;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace EduSubscription.Infrastructure.Persistence.Configurations.Entities;
+namespace EduSubscription.Infrastructure.Persistence.Configurations.Entities.Plans;
 
 public class PlanConfiguration : BaseConfiguration<Plan>
 {

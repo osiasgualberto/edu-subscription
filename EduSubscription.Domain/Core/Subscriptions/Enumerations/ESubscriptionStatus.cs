@@ -1,4 +1,4 @@
-﻿namespace EduSubscription.Subscriptions.Enumerations;
+﻿namespace EduSubscription.Core.Subscriptions.Enumerations;
 
 public enum ESubscriptionStatus
 {

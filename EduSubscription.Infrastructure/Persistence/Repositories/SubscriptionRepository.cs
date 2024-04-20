@@ -1,5 +1,7 @@
-﻿using EduSubscription.Repositories;
-using EduSubscription.Subscriptions;
+﻿using EduSubscription.Core.Payments;
+using EduSubscription.Core.Plans;
+using EduSubscription.Core.Subscriptions;
+using EduSubscription.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace EduSubscription.Infrastructure.Persistence.Repositories;

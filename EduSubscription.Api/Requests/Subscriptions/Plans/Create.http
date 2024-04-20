@@ -1,4 +1,4 @@
-﻿POST http://localhost:5218/api/subscriptions/plans
+﻿POST http://localhost:5218/api/plans
 Content-Type: application/json
 
 {

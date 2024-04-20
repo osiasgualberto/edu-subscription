@@ -1,6 +1,6 @@
 ﻿using EduSubscription.Primitives;
 
-namespace EduSubscription.Subscriptions.Errors;
+namespace EduSubscription.Core.Subscriptions.Errors;
 
 public static class SubscriptionsErrors
 {

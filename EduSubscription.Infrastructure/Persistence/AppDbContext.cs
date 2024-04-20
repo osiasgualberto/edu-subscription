@@ -1,5 +1,7 @@
-﻿using EduSubscription.Primitives;
-using EduSubscription.Subscriptions;
+﻿using EduSubscription.Core.Payments;
+using EduSubscription.Core.Plans;
+using EduSubscription.Core.Subscriptions;
+using EduSubscription.Primitives;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

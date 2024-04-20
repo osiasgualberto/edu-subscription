@@ -1,8 +1,9 @@
-﻿using EduSubscription.Subscriptions;
+﻿using EduSubscription.Core.Plans;
+using EduSubscription.Core.Subscriptions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace EduSubscription.Infrastructure.Persistence.Configurations.Entities;
+namespace EduSubscription.Infrastructure.Persistence.Configurations.Entities.Subscriptions;
 
 public class SubscriptionConfiguration : BaseConfiguration<Subscription>
 {
@@ -10,10 +11,6 @@ public class SubscriptionConfiguration : BaseConfiguration<Subscription>
     {
         base.Configure(builder);
         builder.ToTable("tbl_Subscriptions");
-        builder
-            .HasOne<Plan>(o => o.Plan)
-            .WithMany()
-            .HasForeignKey(o => o.IdPlan)
-            .OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne<Plan>(o => o.Plan).WithMany().HasForeignKey(o => o.IdPlan).OnDelete(DeleteBehavior.Restrict);
     }
 }

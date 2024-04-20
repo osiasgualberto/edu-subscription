@@ -1,6 +1,6 @@
 ﻿using EduSubscription.Primitives;
 
-namespace EduSubscription.Subscriptions;
+namespace EduSubscription.Core.Plans;
 
 public class Plan : Entity
 {
@@ -9,7 +9,6 @@ public class Plan : Entity
         Description = description;
         DurationInMonths = durationInMonths;
     }
-
     public int DurationInMonths { get; private set; }
     public string Description { get; private set; }
 }

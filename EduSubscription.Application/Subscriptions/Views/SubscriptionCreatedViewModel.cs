@@ -1,8 +1,8 @@
-﻿using EduSubscription.Subscriptions.Enumerations;
+﻿using EduSubscription.Core.Payments.Enumerations;
 
 namespace EduSubscription.Application.Subscriptions.Views;
 
-public class SubscriptionCreatedViewModel(
+public record SubscriptionCreatedViewModel(
     Guid Id, 
     Guid SubscriptionStatus, 
     EPaymentStatus PaymentStatus

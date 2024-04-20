@@ -1,3 +1,3 @@
 ﻿namespace EduSubscription.Application.Subscriptions.Views;
 
-public class SubscriptionPlanCreatedViewModel(Guid Id);
+public record SubscriptionPlanCreatedViewModel(Guid Id);

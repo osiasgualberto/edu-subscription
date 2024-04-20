@@ -1,8 +1,8 @@
-﻿using EduSubscription.Subscriptions;
+﻿using EduSubscription.Core.Payments;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace EduSubscription.Infrastructure.Persistence.Configurations.Entities;
+namespace EduSubscription.Infrastructure.Persistence.Configurations.Entities.Payments;
 
 public class PaymentConfiguration : BaseConfiguration<Payment>
 {
@@ -10,7 +10,9 @@ public class PaymentConfiguration : BaseConfiguration<Payment>
     {
         base.Configure(builder);
         builder.ToTable("tbl_Payments");
-        builder.Property(o => o.Status).IsRequired();
+        builder.HasOne(o => o.Subscription).WithMany().HasForeignKey(o => o.IdSubscription).IsRequired()
+            .OnDelete(DeleteBehavior.Restrict);
+        builder.Property(o => o.PaymentStatus).IsRequired();
         builder.Property(o => o.Value).IsRequired();
         builder.Property(o => o.DueDate).IsRequired();
         builder.Property(o => o.ProcessedDate).IsRequired(false);

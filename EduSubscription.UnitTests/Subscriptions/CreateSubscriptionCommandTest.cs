@@ -1,6 +1,6 @@
 ﻿using EduSubscription.Application.Subscriptions.Commands.CreateSubscription;
+using EduSubscription.Core.Subscriptions.Errors;
 using EduSubscription.Repositories;
-using EduSubscription.Subscriptions.Errors;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
 using Xunit;
