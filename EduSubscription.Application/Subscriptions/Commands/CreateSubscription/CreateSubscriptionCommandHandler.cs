@@ -1,7 +1,5 @@
 ﻿using EduSubscription.Application.Subscriptions.Views;
-using EduSubscription.Core.Payments.Enumerations;
 using EduSubscription.Core.Subscriptions;
-using EduSubscription.Core.Subscriptions.Enumerations;
 using EduSubscription.Core.Subscriptions.Errors;
 using EduSubscription.Primitives;
 using EduSubscription.Repositories;

@@ -1,6 +1,7 @@
 ﻿using EduSubscription.Core.Payments;
 using EduSubscription.Core.Plans;
 using EduSubscription.Core.Subscriptions;
+using EduSubscription.Infrastructure.Persistence.Common.Outbox;
 using EduSubscription.Primitives;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +39,7 @@ public class AppDbContext : DbContext
     public DbSet<Subscription> Subscriptions { get; set; } = null!;
     public DbSet<Plan> Plans { get; set; } = null!;
     public DbSet<Payment> Payments { get; set; } = null!;
+    public DbSet<OutboxMessage> OutboxMessages { get; set; } = null!;
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
