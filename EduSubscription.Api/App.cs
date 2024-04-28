@@ -17,6 +17,7 @@ public abstract class App
         builder.Services.AddPersistence();
         builder.Services.AddFluentValidation();
         builder.Services.AddAsaas();
+        builder.Services.AddBackgroundJobs();
         builder.Services.AddMediator();
         var app = builder.Build();
         app.UseMiddleware<ExceptionHandler>();

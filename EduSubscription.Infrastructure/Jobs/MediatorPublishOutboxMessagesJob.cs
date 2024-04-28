@@ -2,6 +2,7 @@
 using EduSubscription.Infrastructure.Persistence;
 using EduSubscription.Primitives.Contracts;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 
@@ -9,26 +10,35 @@ namespace EduSubscription.Infrastructure.Jobs;
 
 public class MediatorPublishOutboxMessagesJob : BackgroundService
 {
-    private readonly AppDbContext _appDbContext;
-    private readonly IPublisher _publisher;
+    private readonly IServiceProvider _provider;
 
-    public MediatorPublishOutboxMessagesJob(AppDbContext appDbContext, IPublisher publisher)
+    public MediatorPublishOutboxMessagesJob(IServiceProvider provider)
     {
-        _appDbContext = appDbContext;
-        _publisher = publisher;
+        _provider = provider;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        var outboxMessages = _appDbContext
+        using var scope = _provider.CreateAsyncScope();
+        var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        var publisher = scope.ServiceProvider.GetRequiredService<IPublisher>();
+
+        var outboxMessages = context
             .OutboxMessages
             .Where(o => !o.Processed);
-        
+
         foreach (var outboxMessage in outboxMessages)
         {
-            var domainEvent = JsonConvert.DeserializeObject<IDomainEvent>(outboxMessage.Content);
+            var domainEvent = JsonConvert.DeserializeObject<IDomainEvent>(outboxMessage.Content,
+                new JsonSerializerSettings()
+                {
+                    TypeNameHandling = TypeNameHandling.All
+                });
             if (domainEvent is null) continue;
-            await _publisher.Publish(domainEvent, stoppingToken);
+            await publisher.Publish(domainEvent, stoppingToken);
+            outboxMessage.Processed = true;
         }
+
+        await context.SaveChangesAsync();
     }
 }

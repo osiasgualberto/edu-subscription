@@ -30,7 +30,7 @@ public class ConvertDomainEventToOutboxMessageInterceptor : SaveChangesIntercept
                 Type = o.GetType().Name,
                 Content = JsonConvert.SerializeObject(o, new JsonSerializerSettings()
                 {
-                    TypeNameHandling = TypeNameHandling.None
+                    TypeNameHandling = TypeNameHandling.All
                 })
             })
             .ToList();

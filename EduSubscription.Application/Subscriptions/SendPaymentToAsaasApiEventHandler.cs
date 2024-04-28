@@ -2,15 +2,14 @@
 using EduSubscription.Application.Services.Dtos;
 using EduSubscription.Core.Subscriptions.Events;
 using EduSubscription.Primitives.Contracts;
-using MediatR;
 
 namespace EduSubscription.Application.Subscriptions;
 
-public class SendChargeToAsaasApiEventHandler : IDomainEventHandler<SubscriptionCreatedEvent>
+public class SendPaymentToAsaasApiEventHandler : IDomainEventHandler<SubscriptionCreatedEvent>
 {
     private readonly IPaymentProvider _paymentProvider;
 
-    public SendChargeToAsaasApiEventHandler(IPaymentProvider paymentProvider)
+    public SendPaymentToAsaasApiEventHandler(IPaymentProvider paymentProvider)
     {
         _paymentProvider = paymentProvider;
     }
