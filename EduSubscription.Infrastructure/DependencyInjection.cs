@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-﻿using EduSubscription.Application.Providers;
-=======
-﻿using EduSubscription.Infrastructure.Jobs;
->>>>>>> fdd449e6ab4e088ca0012b59115889337f277c64
+using EduSubscription.Application.Providers;
+using EduSubscription.Infrastructure.Jobs;
 using EduSubscription.Infrastructure.Persistence;
 using EduSubscription.Infrastructure.Persistence.Configurations;
 using EduSubscription.Infrastructure.Persistence.Interceptors;
@@ -20,8 +17,6 @@ namespace EduSubscription.Infrastructure;
 
 public static class DependencyInjection
 {
-
-<<<<<<< HEAD
     public static IServiceCollection AddAsaas(this IServiceCollection services)
     {
         services
@@ -33,11 +28,12 @@ public static class DependencyInjection
                 client.BaseAddress = new Uri(AsaasResource.AsaasSandboxBaseEndpoint);
                 client.DefaultRequestHeaders.Add("ApiKey", options.ApiKey);
             });
-=======
+        return services;
+    }
+
     public static IServiceCollection AddBackgroundJobs(this IServiceCollection services)
     {
         services.AddHostedService<MediatorPublishOutboxMessagesJob>();
->>>>>>> fdd449e6ab4e088ca0012b59115889337f277c64
         return services;
     }
     
