@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 ﻿using EduSubscription.Application.Providers;
+=======
+﻿using EduSubscription.Infrastructure.Jobs;
+>>>>>>> fdd449e6ab4e088ca0012b59115889337f277c64
 using EduSubscription.Infrastructure.Persistence;
 using EduSubscription.Infrastructure.Persistence.Configurations;
+using EduSubscription.Infrastructure.Persistence.Interceptors;
 using EduSubscription.Infrastructure.Persistence.Repositories;
 using EduSubscription.Infrastructure.Providers;
 using EduSubscription.Infrastructure.Providers.Clients;
@@ -16,6 +21,7 @@ namespace EduSubscription.Infrastructure;
 public static class DependencyInjection
 {
 
+<<<<<<< HEAD
     public static IServiceCollection AddAsaas(this IServiceCollection services)
     {
         services
@@ -27,6 +33,11 @@ public static class DependencyInjection
                 client.BaseAddress = new Uri(AsaasResource.AsaasSandboxBaseEndpoint);
                 client.DefaultRequestHeaders.Add("ApiKey", options.ApiKey);
             });
+=======
+    public static IServiceCollection AddBackgroundJobs(this IServiceCollection services)
+    {
+        services.AddHostedService<MediatorPublishOutboxMessagesJob>();
+>>>>>>> fdd449e6ab4e088ca0012b59115889337f277c64
         return services;
     }
     
@@ -34,12 +45,14 @@ public static class DependencyInjection
     {
         services
             .ConfigureOptions<AppDbContextOptionsSetup>()
+            .AddSingleton<ConvertDomainEventToOutboxMessageInterceptor>()
             .AddDbContext<AppDbContext>(((provider, builder) =>
             {
                 var appDbContextOptions =
                     provider.GetService(typeof(IOptions<AppDbContextOptions>)) as IOptions<AppDbContextOptions>;
                 if (appDbContextOptions is null) return;
-                builder.UseSqlServer(appDbContextOptions.Value.ConnectionString);
+                builder.UseSqlServer(appDbContextOptions.Value.ConnectionString)
+                    .AddInterceptors(provider.GetRequiredService<ConvertDomainEventToOutboxMessageInterceptor>());
             }))
             .AddScoped<IUnitOfWork, AppUnitOfWork>()
             .AddScoped<ISubscriptionRepository, SubscriptionRepository>()

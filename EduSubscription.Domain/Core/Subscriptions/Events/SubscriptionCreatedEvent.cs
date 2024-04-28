@@ -1,6 +1,12 @@
 ﻿using EduSubscription.Primitives.Contracts;
-using MediatR;
 
 namespace EduSubscription.Core.Subscriptions.Events;
 
-public record SubscriptionCreatedEvent : IDomainEvent;
+public class SubscriptionCreatedEvent : IDomainEvent
+{
+    public SubscriptionCreatedEvent(Guid subscriptionId)
+    {
+        SubscriptionId = subscriptionId;
+    }
+    public Guid SubscriptionId { get; set; }
+}

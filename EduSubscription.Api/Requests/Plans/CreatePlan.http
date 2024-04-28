@@ -2,6 +2,6 @@
 Content-Type: application/json
 
 {
-  "description": "",
-  "durationInMonths": 0
+  "description": "teste",
+  "durationInMonths": 12
 }

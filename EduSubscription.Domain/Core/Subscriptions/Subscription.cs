@@ -21,7 +21,7 @@ public class Subscription : Entity
         DateOnly start = new DateOnly(today.Year, today.Month, today.Day);
         DateOnly end = new DateOnly(today.Year, today.Month, today.Day);
         Subscription subscription = new Subscription(ESubscriptionStatus.Pending, start, end, idPlan);
-        subscription.Raise(new SubscriptionCreatedEvent());
+        subscription.Raise(new SubscriptionCreatedEvent(subscription.Id));
         return subscription;
     }
     
