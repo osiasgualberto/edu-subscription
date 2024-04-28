@@ -1,6 +1,11 @@
-﻿using EduSubscription.Infrastructure.Persistence;
+﻿using EduSubscription.Application.Providers;
+using EduSubscription.Infrastructure.Persistence;
 using EduSubscription.Infrastructure.Persistence.Configurations;
 using EduSubscription.Infrastructure.Persistence.Repositories;
+using EduSubscription.Infrastructure.Providers;
+using EduSubscription.Infrastructure.Providers.Clients;
+using EduSubscription.Infrastructure.Providers.Contracts;
+using EduSubscription.Infrastructure.Providers.Options;
 using EduSubscription.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +15,21 @@ namespace EduSubscription.Infrastructure;
 
 public static class DependencyInjection
 {
+
+    public static IServiceCollection AddAsaas(this IServiceCollection services)
+    {
+        services
+            .ConfigureOptions<AsaasPaymentProviderOptionsSetup>()
+            .AddScoped<IPaymentProvider, AsaasPaymentProvider>()
+            .AddHttpClient<IPaymentClient, AsaasPaymentClient>((sp, client) =>
+            {
+                var options = sp.GetRequiredService<IOptions<AsaasPaymentProviderOptions>>().Value;
+                client.BaseAddress = new Uri(AsaasResource.AsaasSandboxBaseEndpoint);
+                client.DefaultRequestHeaders.Add("ApiKey", options.ApiKey);
+            });
+        return services;
+    }
+    
     public static IServiceCollection AddPersistence(this IServiceCollection services)
     {
         services
