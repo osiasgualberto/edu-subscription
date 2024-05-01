@@ -3,6 +3,7 @@
 namespace EduSubscription.Application.Subscriptions.Views;
 
 public record SubscriptionViewModel(
+    Guid Id,
     Guid IdPlan,
     ESubscriptionStatus Status,
     DateOnly Start,

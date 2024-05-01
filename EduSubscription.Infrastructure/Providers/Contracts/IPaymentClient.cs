@@ -1,7 +1,10 @@
-﻿namespace EduSubscription.Infrastructure.Providers.Contracts;
+﻿using System.Net;
+
+namespace EduSubscription.Infrastructure.Providers.Contracts;
 
 public interface IPaymentClient
 {
-    public Task<HttpResponseMessage> GetPaymentEndpoint();
-    public Task<HttpResponseMessage> PostPaymentEndpoint(string content);
+    public Task<HttpResponseMessage> Post(string resource, string content);
+    public Task<HttpResponseMessage> Get(string resource);
+    public Task<HttpResponseMessage> Get(string resource, Dictionary<string, string> queryParams);
 }

@@ -2,6 +2,7 @@
 
 public static class AsaasResource
 {
-    public const string AsaasSandboxBaseEndpoint = "https://sandbox.asaas.com/api/v3";
-    public const string AsaasPaymentEndpoint = "payments";
+    public const string SandboxBaseEndpoint = "https://sandbox.asaas.com/api/v3/";
+    public const string PaymentEndpoint = "payments";
+    public const string CustomerEndpoint = "customers";
 }

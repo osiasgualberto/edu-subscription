@@ -1,9 +1,11 @@
-﻿using System.Text.Json;
-using Azure;
-using EduSubscription.Application.Providers;
+﻿using EduSubscription.Application.Providers;
 using EduSubscription.Application.Providers.Dtos;
-using EduSubscription.Application.Services.Dtos;
+using EduSubscription.Application.Providers.Models;
+using EduSubscription.Application.Providers.Models.Customers;
+using EduSubscription.Application.Providers.Models.Payments;
+using EduSubscription.Infrastructure.Providers.Clients;
 using EduSubscription.Infrastructure.Providers.Contracts;
+using Newtonsoft.Json;
 
 namespace EduSubscription.Infrastructure.Providers;
 
@@ -16,15 +18,30 @@ public class AsaasPaymentProvider : IPaymentProvider
         _client = client;
     }
 
-    public async Task<PaymentResponse?> Execute(PaymentRequest request)
+    public async Task<bool> AnyCustomerByDocumentNumber(string documentNumber)
     {
-        var resultStream = new MemoryStream();
-        await JsonSerializer.SerializeAsync(resultStream, request, new JsonSerializerOptions()
+        var response = await GetCustomerByDocumentNumber(documentNumber);
+        if (response.Count == 0) return false;
+        return true;
+    }
+
+    public async Task<DefaultResponse<CustomerResponse>> GetCustomerByDocumentNumber(string documentNumber)
+    {
+        var customer = await _client.Get(AsaasResource.CustomerEndpoint, new()
         {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            {"cpfCnpj", documentNumber}
         });
-        if (resultStream.Length == 0) return default!;
-        await _client.PostPaymentEndpoint(resultStream.ToString() ?? "");
-        return new PaymentResponse();
+        return JsonConvert.DeserializeObject<DefaultResponse<CustomerResponse>>(
+            await customer.Content.ReadAsStringAsync())!;
+    }
+
+    public Task<DefaultResponse<CustomerResponse>> CreateCustomer(CustomerRequest request)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<DefaultResponse<PaymentResponse>> CreateUniquePaymentSlip(UniquePaymentSlipRequest request)
+    {
+        var customer = await GetCustomerByDocumentNumber(request.CustomerDocumentNumber);
     }
 }

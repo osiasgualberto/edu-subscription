@@ -1,4 +1,6 @@
-﻿using EduSubscription.Infrastructure.Providers.Contracts;
+﻿using System.Net;
+using EduSubscription.Infrastructure.Providers.Contracts;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace EduSubscription.Infrastructure.Providers.Clients;
 
@@ -11,16 +13,23 @@ public class AsaasPaymentClient : IPaymentClient
         _client = client;
     }
 
-    public async Task<HttpResponseMessage> GetPaymentEndpoint()
+    public async Task<HttpResponseMessage> Get(string resource)
     {
-        var response = await _client.GetAsync(AsaasResource.AsaasPaymentEndpoint);
+        var response = await _client.GetAsync(resource);
         return response;
     }
 
-    public async Task<HttpResponseMessage> PostPaymentEndpoint(string content)
+    public async Task<HttpResponseMessage> Get(string resource, Dictionary<string, string> queryParams)
+    {
+        var requestUri = QueryHelpers.AddQueryString(resource, queryParams!);
+        var response = await _client.GetAsync(requestUri);
+        return response;
+    }
+
+    public async Task<HttpResponseMessage> Post(string resource, string content)
     {
         var bodyContent = new StringContent(content);
-        var response = await _client.PostAsync(AsaasResource.AsaasPaymentEndpoint, bodyContent);
+        var response = await _client.PostAsync(resource, bodyContent);
         return response;
     }
 }

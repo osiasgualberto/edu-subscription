@@ -25,8 +25,8 @@ public static class DependencyInjection
             .AddHttpClient<IPaymentClient, AsaasPaymentClient>((sp, client) =>
             {
                 var options = sp.GetRequiredService<IOptions<AsaasPaymentProviderOptions>>().Value;
-                client.BaseAddress = new Uri(AsaasResource.AsaasSandboxBaseEndpoint);
-                client.DefaultRequestHeaders.Add("ApiKey", options.ApiKey);
+                client.BaseAddress = new Uri(AsaasResource.SandboxBaseEndpoint);
+                client.DefaultRequestHeaders.Add("access_token", options.ApiKey);
             });
         return services;
     }
