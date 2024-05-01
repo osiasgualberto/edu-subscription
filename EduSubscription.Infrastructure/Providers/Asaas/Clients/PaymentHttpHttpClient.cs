@@ -1,14 +1,13 @@
-﻿using System.Net;
-using EduSubscription.Infrastructure.Providers.Contracts;
+﻿using EduSubscription.Infrastructure.Providers.Asaas.Contracts;
 using Microsoft.AspNetCore.WebUtilities;
 
-namespace EduSubscription.Infrastructure.Providers.Clients;
+namespace EduSubscription.Infrastructure.Providers.Asaas.Clients;
 
-public class AsaasPaymentClient : IPaymentClient
+public class PaymentHttpHttpClient : IPaymentHttpClient
 {
     private readonly HttpClient _client;
 
-    public AsaasPaymentClient(HttpClient client)
+    public PaymentHttpHttpClient(HttpClient client)
     {
         _client = client;
     }

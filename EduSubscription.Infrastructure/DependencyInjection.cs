@@ -1,13 +1,15 @@
 using EduSubscription.Application.Providers;
+using EduSubscription.Application.Providers.Payment;
 using EduSubscription.Infrastructure.Jobs;
 using EduSubscription.Infrastructure.Persistence;
 using EduSubscription.Infrastructure.Persistence.Configurations;
 using EduSubscription.Infrastructure.Persistence.Interceptors;
 using EduSubscription.Infrastructure.Persistence.Repositories;
 using EduSubscription.Infrastructure.Providers;
-using EduSubscription.Infrastructure.Providers.Clients;
-using EduSubscription.Infrastructure.Providers.Contracts;
-using EduSubscription.Infrastructure.Providers.Options;
+using EduSubscription.Infrastructure.Providers.Asaas;
+using EduSubscription.Infrastructure.Providers.Asaas.Clients;
+using EduSubscription.Infrastructure.Providers.Asaas.Contracts;
+using EduSubscription.Infrastructure.Providers.Asaas.Options;
 using EduSubscription.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,12 +22,12 @@ public static class DependencyInjection
     public static IServiceCollection AddAsaas(this IServiceCollection services)
     {
         services
-            .ConfigureOptions<AsaasPaymentProviderOptionsSetup>()
-            .AddScoped<IPaymentProvider, AsaasPaymentProvider>()
-            .AddHttpClient<IPaymentClient, AsaasPaymentClient>((sp, client) =>
+            .ConfigureOptions<PaymentProviderOptionsSetup>()
+            .AddScoped<IPaymentProvider, PaymentProvider>()
+            .AddHttpClient<IPaymentHttpClient, PaymentHttpHttpClient>((sp, client) =>
             {
-                var options = sp.GetRequiredService<IOptions<AsaasPaymentProviderOptions>>().Value;
-                client.BaseAddress = new Uri(AsaasResource.SandboxBaseEndpoint);
+                var options = sp.GetRequiredService<IOptions<PaymentProviderOptions>>().Value;
+                client.BaseAddress = new Uri(Resources.SandboxBaseEndpoint);
                 client.DefaultRequestHeaders.Add("access_token", options.ApiKey);
             });
         return services;

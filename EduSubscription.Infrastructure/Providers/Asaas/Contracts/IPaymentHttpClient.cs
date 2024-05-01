@@ -1,8 +1,6 @@
-﻿using System.Net;
+﻿namespace EduSubscription.Infrastructure.Providers.Asaas.Contracts;
 
-namespace EduSubscription.Infrastructure.Providers.Contracts;
-
-public interface IPaymentClient
+public interface IPaymentHttpClient
 {
     public Task<HttpResponseMessage> Post(string resource, string content);
     public Task<HttpResponseMessage> Get(string resource);

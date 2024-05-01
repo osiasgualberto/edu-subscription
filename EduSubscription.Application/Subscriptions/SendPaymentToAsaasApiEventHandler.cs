@@ -1,6 +1,4 @@
-﻿using EduSubscription.Application.Providers;
-using EduSubscription.Application.Providers.Models;
-using EduSubscription.Application.Providers.Models.Payments;
+﻿using EduSubscription.Application.Providers.Payment;
 using EduSubscription.Core.Subscriptions.Events;
 using EduSubscription.Primitives.Contracts;
 using EduSubscription.Repositories;
@@ -20,8 +18,7 @@ public class SendPaymentToAsaasApiEventHandler : IDomainEventHandler<Subscriptio
 
     public async Task Handle(SubscriptionCreatedEvent notification, CancellationToken cancellationToken)
     {
-        // var customer = _unitOfWork.MemberRepository.ReadById(notification.MemberId);
-        var paymentRequest = new UniquePaymentSlipRequest("24971563792", DateTime.Now.ToString("dd/MM/yyyy"), notification.Value);
-        await _paymentProvider.CreateUniquePaymentSlip(paymentRequest);
+        // var paymentRequest = new CreateUniquePaymentRequest("24971563792", DateTime.Now.ToString("dd/MM/yyyy"), notification.Value);
+        await _paymentProvider.CreateUniquePaymentSlip(default!);
     }
 }
