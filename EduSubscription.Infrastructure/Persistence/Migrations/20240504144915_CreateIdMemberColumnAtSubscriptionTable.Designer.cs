@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EduSubscription.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240503133636_CreateRelationWithMemberInSubTable")]
-    partial class CreateRelationWithMemberInSubTable
+    [Migration("20240504144915_CreateIdMemberColumnAtSubscriptionTable")]
+    partial class CreateIdMemberColumnAtSubscriptionTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,7 +58,7 @@ namespace EduSubscription.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tbl_Member", (string)null);
+                    b.ToTable("tbl_Members", (string)null);
                 });
 
             modelBuilder.Entity("EduSubscription.Core.Payments.Payment", b =>
@@ -118,7 +118,7 @@ namespace EduSubscription.Infrastructure.Persistence.Migrations
                     b.Property<DateOnly>("End")
                         .HasColumnType("date");
 
-                    b.Property<Guid>("IdMember")
+                    b.Property<Guid?>("IdMember")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("IdPlan")
@@ -131,8 +131,6 @@ namespace EduSubscription.Infrastructure.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IdMember");
 
                     b.HasIndex("IdPlan");
 
@@ -152,7 +150,7 @@ namespace EduSubscription.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 3, 10, 36, 36, 76, DateTimeKind.Local).AddTicks(746));
+                        .HasDefaultValue(new DateTime(2024, 5, 4, 11, 49, 14, 787, DateTimeKind.Local).AddTicks(1210));
 
                     b.Property<bool>("Processed")
                         .HasColumnType("bit");
@@ -179,19 +177,11 @@ namespace EduSubscription.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("EduSubscription.Core.Subscriptions.Subscription", b =>
                 {
-                    b.HasOne("EduSubscription.Core.Members.Member", "Member")
-                        .WithMany()
-                        .HasForeignKey("IdMember")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("EduSubscription.Core.Plans.Plan", "Plan")
                         .WithMany()
                         .HasForeignKey("IdPlan")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("Member");
 
                     b.Navigation("Plan");
                 });

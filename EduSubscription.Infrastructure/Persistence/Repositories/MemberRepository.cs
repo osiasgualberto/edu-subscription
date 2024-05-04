@@ -6,7 +6,6 @@ namespace EduSubscription.Infrastructure.Persistence.Repositories;
 
 public class MemberRepository : IMemberRepository
 {
-    
     private readonly AppDbContext _appDbContext;
 
     public MemberRepository(AppDbContext appDbContext)

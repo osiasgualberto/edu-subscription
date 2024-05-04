@@ -1,4 +1,5 @@
 ﻿using EduSubscription.Core.Members;
+using EduSubscription.Core.Members.Errors;
 using EduSubscription.Core.Plans;
 using EduSubscription.Core.Subscriptions;
 using Microsoft.EntityFrameworkCore;

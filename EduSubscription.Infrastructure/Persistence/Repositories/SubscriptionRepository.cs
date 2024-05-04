@@ -29,4 +29,12 @@ public class SubscriptionRepository : ISubscriptionRepository
     {
         return _appDbContext.Subscriptions.SingleOrDefaultAsync(o => o.Id == id);
     }
+
+    public async Task<bool> Delete(Guid id)
+    {
+        var subscription = await ReadById(id);
+        if (subscription is null) return false;
+        _appDbContext.Subscriptions.Remove(subscription);
+        return true;
+    }
 }

@@ -5,4 +5,4 @@ using EduSubscription.Repositories.Contracts;
 
 namespace EduSubscription.Repositories;
 
-public interface ISubscriptionRepository : IWritableRepository<Subscription>, IReadableAllRepository<Subscription>, IReadableRepository<Subscription>;
+public interface ISubscriptionRepository : IWritableRepository<Subscription>, IReadableAllRepository<Subscription>, IReadableRepository<Subscription>, IDeletableRepository;

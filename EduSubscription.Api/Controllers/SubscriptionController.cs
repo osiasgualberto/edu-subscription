@@ -1,5 +1,6 @@
 ﻿using EduSubscription.Api.Abstractions;
 using EduSubscription.Application.Subscriptions.Commands.CreateSubscription;
+using EduSubscription.Application.Subscriptions.Commands.DeleteSubscription;
 using EduSubscription.Application.Subscriptions.Queries.GetAllSubscriptions;
 using EduSubscription.Application.Subscriptions.Queries.GetSubscriptionById;
 using MediatR;
@@ -42,6 +43,15 @@ public class SubscriptionController : ApiController
     {
         var view = await _mediator.Send(new GetAllSubscriptionsQuery());
         return Ok(view);    
+    }
+    
+    [HttpDelete(ApiRoutes.Subscription.BaseSubscriptionWithId)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> DeleteSubscription(Guid id)
+    {
+        var result = await _mediator.Send(new DeleteSubscriptionCommand(id));
+        return result.IsSuccess ? NoContent() : BadRequest(result.Error);
     }
     
 }

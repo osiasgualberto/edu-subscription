@@ -6,27 +6,30 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EduSubscription.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateRelationWithMemberInSubTable : Migration
+    public partial class CreateIdMemberForeignKeyAtSubscriptionTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<Guid>(
+            migrationBuilder.AlterColumn<Guid>(
                 name: "IdMember",
                 table: "tbl_Subscriptions",
                 type: "uniqueidentifier",
                 nullable: false,
-                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
+                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"),
+                oldClrType: typeof(Guid),
+                oldType: "uniqueidentifier",
+                oldNullable: true);
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreatedAt",
                 table: "tbl_OutboxMessages",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2024, 5, 3, 10, 36, 36, 76, DateTimeKind.Local).AddTicks(746),
+                defaultValue: new DateTime(2024, 5, 4, 11, 53, 34, 367, DateTimeKind.Local).AddTicks(400),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2024, 5, 3, 9, 32, 2, 369, DateTimeKind.Local).AddTicks(2369));
+                oldDefaultValue: new DateTime(2024, 5, 4, 11, 49, 14, 787, DateTimeKind.Local).AddTicks(1210));
 
             migrationBuilder.CreateIndex(
                 name: "IX_tbl_Subscriptions_IdMember",
@@ -34,10 +37,10 @@ namespace EduSubscription.Infrastructure.Persistence.Migrations
                 column: "IdMember");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_tbl_Subscriptions_tbl_Member_IdMember",
+                name: "FK_tbl_Subscriptions_tbl_Members_IdMember",
                 table: "tbl_Subscriptions",
                 column: "IdMember",
-                principalTable: "tbl_Member",
+                principalTable: "tbl_Members",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }
@@ -46,26 +49,30 @@ namespace EduSubscription.Infrastructure.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_tbl_Subscriptions_tbl_Member_IdMember",
+                name: "FK_tbl_Subscriptions_tbl_Members_IdMember",
                 table: "tbl_Subscriptions");
 
             migrationBuilder.DropIndex(
                 name: "IX_tbl_Subscriptions_IdMember",
                 table: "tbl_Subscriptions");
 
-            migrationBuilder.DropColumn(
+            migrationBuilder.AlterColumn<Guid>(
                 name: "IdMember",
-                table: "tbl_Subscriptions");
+                table: "tbl_Subscriptions",
+                type: "uniqueidentifier",
+                nullable: true,
+                oldClrType: typeof(Guid),
+                oldType: "uniqueidentifier");
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreatedAt",
                 table: "tbl_OutboxMessages",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2024, 5, 3, 9, 32, 2, 369, DateTimeKind.Local).AddTicks(2369),
+                defaultValue: new DateTime(2024, 5, 4, 11, 49, 14, 787, DateTimeKind.Local).AddTicks(1210),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2024, 5, 3, 10, 36, 36, 76, DateTimeKind.Local).AddTicks(746));
+                oldDefaultValue: new DateTime(2024, 5, 4, 11, 53, 34, 367, DateTimeKind.Local).AddTicks(400));
         }
     }
 }

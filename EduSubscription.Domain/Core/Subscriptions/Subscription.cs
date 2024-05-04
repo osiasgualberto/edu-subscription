@@ -36,7 +36,7 @@ public class Subscription : Entity
     public Guid IdPlan { get; private set; }
     public Plan Plan { get; private set; } = null!;
     public Guid IdMember { get; private set; }
-    public Member Member { get; private set; } = null!;
+    public Member Member { get; private set; }
     public ESubscriptionStatus Status { get; private set; }
     public DateOnly Start { get; private set; }
     public DateOnly End { get; private set; }

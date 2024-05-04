@@ -2,8 +2,8 @@
 Content-Type: application/json
 
 {
-  "firstName": "teste",
-  "lastName": "12",
+  "firstName": "João",
+  "lastName": "Paulo Back",
   "email": "mail@mail.com",
-  "documentNumber": "112"
+  "documentNumber": "64752314600"
 }

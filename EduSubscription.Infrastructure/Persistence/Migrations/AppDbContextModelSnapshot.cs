@@ -55,7 +55,7 @@ namespace EduSubscription.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tbl_Member", (string)null);
+                    b.ToTable("tbl_Members", (string)null);
                 });
 
             modelBuilder.Entity("EduSubscription.Core.Payments.Payment", b =>
@@ -149,7 +149,7 @@ namespace EduSubscription.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 3, 10, 36, 36, 76, DateTimeKind.Local).AddTicks(746));
+                        .HasDefaultValue(new DateTime(2024, 5, 4, 11, 53, 34, 367, DateTimeKind.Local).AddTicks(400));
 
                     b.Property<bool>("Processed")
                         .HasColumnType("bit");

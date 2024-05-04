@@ -6,23 +6,29 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EduSubscription.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateMemberTable : Migration
+    public partial class CreateIdMemberColumnAtSubscriptionTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AddColumn<Guid>(
+                name: "IdMember",
+                table: "tbl_Subscriptions",
+                type: "uniqueidentifier",
+                nullable: true);
+
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreatedAt",
                 table: "tbl_OutboxMessages",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2024, 5, 3, 9, 32, 2, 369, DateTimeKind.Local).AddTicks(2369),
+                defaultValue: new DateTime(2024, 5, 4, 11, 49, 14, 787, DateTimeKind.Local).AddTicks(1210),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2024, 4, 26, 9, 56, 1, 879, DateTimeKind.Local).AddTicks(8196));
 
             migrationBuilder.CreateTable(
-                name: "tbl_Member",
+                name: "tbl_Members",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -35,7 +41,7 @@ namespace EduSubscription.Infrastructure.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tbl_Member", x => x.Id);
+                    table.PrimaryKey("PK_tbl_Members", x => x.Id);
                 });
         }
 
@@ -43,7 +49,11 @@ namespace EduSubscription.Infrastructure.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "tbl_Member");
+                name: "tbl_Members");
+
+            migrationBuilder.DropColumn(
+                name: "IdMember",
+                table: "tbl_Subscriptions");
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreatedAt",
@@ -53,7 +63,7 @@ namespace EduSubscription.Infrastructure.Persistence.Migrations
                 defaultValue: new DateTime(2024, 4, 26, 9, 56, 1, 879, DateTimeKind.Local).AddTicks(8196),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2024, 5, 3, 9, 32, 2, 369, DateTimeKind.Local).AddTicks(2369));
+                oldDefaultValue: new DateTime(2024, 5, 4, 11, 49, 14, 787, DateTimeKind.Local).AddTicks(1210));
         }
     }
 }
