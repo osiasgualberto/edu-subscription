@@ -7,6 +7,8 @@ public interface IUnitOfWork
 {
     public IPlanRepository PlanRepository { get; set; }
     public ISubscriptionRepository SubscriptionRepository { get; set; }
+    public IMemberRepository MemberRepository { get; set; }
+    
     /// <summary>
     /// Completes a transaction.
     /// </summary>

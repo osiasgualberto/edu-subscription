@@ -1,6 +1,7 @@
 ﻿using EduSubscription.Api.Abstractions;
 using EduSubscription.Application.Subscriptions.Commands.CreateSubscription;
 using EduSubscription.Application.Subscriptions.Queries.GetAllSubscriptions;
+using EduSubscription.Application.Subscriptions.Queries.GetSubscriptionById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +25,15 @@ public class SubscriptionController : ApiController
     {
         var result = await _mediator.Send(createSubscriptionCommand);
         return result.IsSuccess ? CreatedAtAction(nameof(PostSubscription), value: result.Value) : BadRequest(result.Error);
+    }
+    
+    [HttpGet(ApiRoutes.Subscription.BaseSubscriptionWithId)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> GetSubscriptionById(Guid id)
+    {
+        var result = await _mediator.Send(new GetSubscriptionByIdQuery(id));
+        return result.IsSuccess ? Ok(result.Value) : NotFound(result.Error);
     }
     
     [HttpGet(ApiRoutes.Subscription.BaseSubscription)]

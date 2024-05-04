@@ -4,8 +4,8 @@ namespace EduSubscription.Core.Subscriptions.Errors;
 
 public static class SubscriptionsErrors
 {
-    public static class Plan
+    public static class Subscription
     {
-        public static Error PlanNotFound = new("SubscriptionPlan.NotFound", "This subscription plan was not found.");
+        public static Error SubscriptionNotFound = new("Subscription.NotFound", "The subscription was not found.");
     }
 }

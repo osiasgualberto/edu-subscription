@@ -22,6 +22,42 @@ namespace EduSubscription.Infrastructure.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("EduSubscription.Core.Members.Member", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("DocumentNumber")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tbl_Member", (string)null);
+                });
+
             modelBuilder.Entity("EduSubscription.Core.Payments.Payment", b =>
                 {
                     b.Property<Guid>("Id")
@@ -79,6 +115,9 @@ namespace EduSubscription.Infrastructure.Persistence.Migrations
                     b.Property<DateOnly>("End")
                         .HasColumnType("date");
 
+                    b.Property<Guid>("IdMember")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("IdPlan")
                         .HasColumnType("uniqueidentifier");
 
@@ -89,6 +128,8 @@ namespace EduSubscription.Infrastructure.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdMember");
 
                     b.HasIndex("IdPlan");
 
@@ -108,7 +149,7 @@ namespace EduSubscription.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 4, 26, 9, 56, 1, 879, DateTimeKind.Local).AddTicks(8196));
+                        .HasDefaultValue(new DateTime(2024, 5, 3, 10, 36, 36, 76, DateTimeKind.Local).AddTicks(746));
 
                     b.Property<bool>("Processed")
                         .HasColumnType("bit");
@@ -135,11 +176,19 @@ namespace EduSubscription.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("EduSubscription.Core.Subscriptions.Subscription", b =>
                 {
+                    b.HasOne("EduSubscription.Core.Members.Member", "Member")
+                        .WithMany()
+                        .HasForeignKey("IdMember")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("EduSubscription.Core.Plans.Plan", "Plan")
                         .WithMany()
                         .HasForeignKey("IdPlan")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Member");
 
                     b.Navigation("Plan");
                 });

@@ -1,9 +1,10 @@
 ﻿using EduSubscription.Application.Providers.Payment;
+using EduSubscription.Application.Providers.Payment.Models.Requests;
 using EduSubscription.Core.Subscriptions.Events;
 using EduSubscription.Primitives.Contracts;
 using EduSubscription.Repositories;
 
-namespace EduSubscription.Application.Subscriptions;
+namespace EduSubscription.Application.Subscriptions.Events;
 
 public class SendPaymentToAsaasApiEventHandler : IDomainEventHandler<SubscriptionCreatedEvent>
 {
@@ -18,7 +19,8 @@ public class SendPaymentToAsaasApiEventHandler : IDomainEventHandler<Subscriptio
 
     public async Task Handle(SubscriptionCreatedEvent notification, CancellationToken cancellationToken)
     {
-        // var paymentRequest = new CreateUniquePaymentRequest("24971563792", DateTime.Now.ToString("dd/MM/yyyy"), notification.Value);
-        await _paymentProvider.CreateUniquePaymentSlip(default!);
+        var paymentRequest = new CreatePaymentRequest("cus_000005982937", notification.Value, 1, DateTime.Today.AddDays(1), "BOLETO");
+        var response = await _paymentProvider.CreatePaymentSlip(paymentRequest);
+        if(response is not null) Console.WriteLine(response.Id);
     }
 }

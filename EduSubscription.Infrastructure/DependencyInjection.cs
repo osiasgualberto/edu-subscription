@@ -10,6 +10,7 @@ using EduSubscription.Infrastructure.Providers.Asaas;
 using EduSubscription.Infrastructure.Providers.Asaas.Clients;
 using EduSubscription.Infrastructure.Providers.Asaas.Contracts;
 using EduSubscription.Infrastructure.Providers.Asaas.Options;
+using EduSubscription.Infrastructure.Providers.Asaas.Serialization;
 using EduSubscription.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +25,7 @@ public static class DependencyInjection
         services
             .ConfigureOptions<PaymentProviderOptionsSetup>()
             .AddScoped<IPaymentProvider, PaymentProvider>()
+            .AddScoped<IPaymentSerializer, PaymentSerializer>()
             .AddHttpClient<IPaymentHttpClient, PaymentHttpHttpClient>((sp, client) =>
             {
                 var options = sp.GetRequiredService<IOptions<PaymentProviderOptions>>().Value;
@@ -55,6 +57,7 @@ public static class DependencyInjection
             .AddScoped<IUnitOfWork, AppUnitOfWork>()
             .AddScoped<ISubscriptionRepository, SubscriptionRepository>()
             .AddScoped<IPlanRepository, PlanRepository>()
+            .AddScoped<IMemberRepository, MemberRepository>()
             .AddScoped<IPaymentRepository, PaymentRepository>();
         return services;
     }

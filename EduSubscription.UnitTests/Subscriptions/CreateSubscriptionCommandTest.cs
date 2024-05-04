@@ -1,4 +1,5 @@
 ﻿using EduSubscription.Application.Subscriptions.Commands.CreateSubscription;
+using EduSubscription.Core.Plans.Errors;
 using EduSubscription.Core.Subscriptions.Errors;
 using EduSubscription.Repositories;
 using NSubstitute;
@@ -26,11 +27,11 @@ public class CreateSubscriptionCommandTest
             .SubscriptionRepository
             .ReadById(Arg.Any<Guid>())
             .ReturnsNull();
-        var command = new CreateSubscriptionCommand(Arg.Any<Guid>());
+        var command = new CreateSubscriptionCommand(Arg.Any<Guid>(), Arg.Any<Guid>());
         var handler = new CreateSubscriptionCommandHandler(_unitOfWorkMock);
         // Act
         var result = await handler.Handle(command, CancellationToken.None);
         // Assert
-        Assert.Equal(result.Error, SubscriptionsErrors.Plan.PlanNotFound);
+        Assert.Equal(result.Error, PlanErrors.Plan.PlanNotFound);
     }
 }

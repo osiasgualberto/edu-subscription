@@ -13,9 +13,9 @@ public class PaymentRepository : IPaymentRepository
         _appDbContext = appDbContext;
     }
 
-    public async Task Add(Payment plan)
+    public async Task Add(Payment member)
     {
-        await _appDbContext.Payments.AddAsync(plan);
+        await _appDbContext.Payments.AddAsync(member);
     }
 
     public async Task<List<Payment>> ReadAll()

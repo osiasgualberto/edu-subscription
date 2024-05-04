@@ -1,2 +1,2 @@
 ﻿@echo off
-dotnet-ef database update -s ../ClinicManager.Api
+dotnet-ef database update -s ../EduSubscription.Api

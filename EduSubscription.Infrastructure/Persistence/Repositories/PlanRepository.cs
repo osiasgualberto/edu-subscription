@@ -13,9 +13,9 @@ public class PlanRepository : IPlanRepository
         _appDbContext = appDbContext;
     }
 
-    public async Task Add(Plan plan)
+    public async Task Add(Plan member)
     {
-        await _appDbContext.Plans.AddAsync(plan);
+        await _appDbContext.Plans.AddAsync(member);
     }
 
     public async Task<Plan?> ReadById(Guid id)

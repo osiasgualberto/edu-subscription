@@ -1,4 +1,6 @@
 ﻿using EduSubscription.Application.Subscriptions.Views;
+using EduSubscription.Core.Members.Errors;
+using EduSubscription.Core.Plans.Errors;
 using EduSubscription.Core.Subscriptions;
 using EduSubscription.Core.Subscriptions.Errors;
 using EduSubscription.Primitives;
@@ -21,9 +23,14 @@ public class CreateSubscriptionCommandHandler : IRequestHandler<CreateSubscripti
         var plan = await _unitOfWork.PlanRepository.ReadById(request.IdPlan);
         if (plan is null)
         {
-            return Result.Fail<SubscriptionCreatedViewModel>(SubscriptionsErrors.Plan.PlanNotFound);
+            return Result.Fail<SubscriptionCreatedViewModel>(PlanErrors.Plan.PlanNotFound);
         }
-        var subscription = Subscription.Create(plan.Id);
+        var member = await _unitOfWork.MemberRepository.ReadById(request.IdMember);
+        if (member is null)
+        {
+            return Result.Fail<SubscriptionCreatedViewModel>(MemberErrors.Member.MemberNotFound);
+        }
+        var subscription = Subscription.Create(plan.Id, member.Id);
         await _unitOfWork.SubscriptionRepository.Add(subscription);
         await _unitOfWork.Complete();
         return Result.Ok(new SubscriptionCreatedViewModel(subscription.Id));

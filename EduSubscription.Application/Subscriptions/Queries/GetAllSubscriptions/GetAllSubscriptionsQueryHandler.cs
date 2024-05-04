@@ -18,7 +18,7 @@ public class GetAllSubscriptionsQueryHandler : IRequestHandler<GetAllSubscriptio
         var subscriptions = await _unitOfWork.SubscriptionRepository
             .ReadAll();
         var view = subscriptions
-            .Select(o => new SubscriptionViewModel(o.Id, o.IdPlan, o.Status, o.Start, o.End))
+            .Select(o => new SubscriptionViewModel(o.Id, o.IdPlan, o.IdMember, o.Status, o.Start, o.End))
             .ToList();
         return view;
     }

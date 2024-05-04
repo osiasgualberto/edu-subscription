@@ -7,6 +7,6 @@ public interface IWritableRepository<in TEntity> where TEntity : Entity
     /// <summary>
     /// Adds an entity to a data repository.
     /// </summary>
-    /// <param name="plan"></param>
-    public Task Add(TEntity plan);
+    /// <param name="member"></param>
+    public Task Add(TEntity member);
 }

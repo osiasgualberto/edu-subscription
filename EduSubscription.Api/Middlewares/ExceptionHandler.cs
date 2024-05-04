@@ -11,6 +11,14 @@ namespace EduSubscription.Api.Middlewares;
 /// </summary>
 public class ExceptionHandler : IMiddleware
 {
+
+    private readonly ILogger<ExceptionHandler> _logger;
+
+    public ExceptionHandler(ILogger<ExceptionHandler> logger)
+    {
+        _logger = logger;
+    }
+
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
         try
@@ -39,7 +47,10 @@ public class ExceptionHandler : IMiddleware
         {
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             context.Response.ContentType = "application/json";
-            var apiErrorResponse = new ApiErrorResponse(new[] { new Error("Server.UnknownError", exception.Message)});
+            _logger.Log(LogLevel.Debug, "Stack trace: {0}",exception.StackTrace);
+            _logger.Log(LogLevel.Error, "Exception message: {0}", exception.Message);
+            _logger.Log(LogLevel.Error, "Inner exception: {0}", exception.InnerException?.Message);
+            var apiErrorResponse = new ApiErrorResponse(new[] { new Error("Server.UnknownError", "An unexpected error occured.")});
             var options = new JsonSerializerOptions()
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase

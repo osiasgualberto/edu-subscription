@@ -1,6 +1,8 @@
+using System.Runtime.InteropServices.ComTypes;
 using EduSubscription.Api.Middlewares;
 using EduSubscription.Application;
 using EduSubscription.Infrastructure;
+using Serilog;
 
 namespace EduSubscription.Api;
 
@@ -12,6 +14,10 @@ public abstract class App
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder();
+        builder.Host.UseSerilog((context, config) =>
+        {
+            config.ReadFrom.Configuration(context.Configuration);
+        });
         builder.Services.AddScoped<ExceptionHandler>();
         builder.Services.AddControllers();
         builder.Services.AddPersistence();

@@ -1,4 +1,5 @@
-﻿using EduSubscription.Core.Payments;
+﻿using EduSubscription.Core.Members;
+using EduSubscription.Core.Payments;
 using EduSubscription.Core.Plans;
 using EduSubscription.Core.Subscriptions;
 using EduSubscription.Infrastructure.Persistence.Common.Outbox;
@@ -40,6 +41,7 @@ public class AppDbContext : DbContext
     public DbSet<Plan> Plans { get; set; } = null!;
     public DbSet<Payment> Payments { get; set; } = null!;
     public DbSet<OutboxMessage> OutboxMessages { get; set; } = null!;
+    public DbSet<Member> Members { get; set; } = null!;
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

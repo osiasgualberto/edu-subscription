@@ -1,0 +1,9 @@
+﻿PUT http://localhost:5218/api/members/482d160a-6b86-4202-a424-8f38c9196639
+Content-Type: application/json
+Accept: application/json
+
+{
+  "firstName": "Zeca",
+  "lastName": "Urubu",
+  "documentNumber": "1115432893"
+}

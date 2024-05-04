@@ -15,9 +15,9 @@ public class SubscriptionRepository : ISubscriptionRepository
         _appDbContext = appDbContext;
     }
 
-    public async Task Add(Subscription plan)
+    public async Task Add(Subscription member)
     {
-        await _appDbContext.Subscriptions.AddAsync(plan);
+        await _appDbContext.Subscriptions.AddAsync(member);
     }
 
     public Task<List<Subscription>> ReadAll()

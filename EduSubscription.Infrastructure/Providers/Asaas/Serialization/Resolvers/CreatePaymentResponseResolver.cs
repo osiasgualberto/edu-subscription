@@ -1,19 +1,20 @@
 ﻿using Newtonsoft.Json.Serialization;
 
-namespace EduSubscription.Infrastructure.Providers.Asaas.Serialization;
+namespace EduSubscription.Infrastructure.Providers.Asaas.Serialization.Resolvers;
 
-public class PaymentContractResolver : DefaultContractResolver
+public class CreatePaymentResponseResolver : DefaultContractResolver
 {
     private Dictionary<string, string?> _mappings;
     
-    public PaymentContractResolver()
+    public CreatePaymentResponseResolver()
     {
         _mappings = new()
         {
-            { "CustomerDocument", "customer" },
+            { "Customer", "customer" },
             { "Value", "value" },
             { "Due", "dueDate" },
             { "Installments", "installmentsValue" },
+            { "ChargeType", "billingType"}
         };
     }    
     protected override string ResolvePropertyName(string propertyName)

@@ -1,0 +1,2 @@
+﻿GET http://localhost:5218/api/members/e79e065e-14bb-4b93-b8fc-10c5aee01ec6
+Accept: application/json

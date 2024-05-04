@@ -1,9 +1,9 @@
-﻿using EduSubscription.Application.Providers.Payment.Requests;
-using EduSubscription.Application.Providers.Payment.Responses;
+﻿using EduSubscription.Application.Providers.Payment.Models.Requests;
+using EduSubscription.Application.Providers.Payment.Models.Responses;
 
 namespace EduSubscription.Application.Providers.Payment;
 
 public interface IPaymentProvider
 {
-    public Task<CreatedUniquePaymentResponse?> CreateUniquePaymentSlip(CreatePaymentRequest request);
+    public Task<CreatedPaymentResponse?> CreatePaymentSlip(CreatePaymentRequest request);
 }
