@@ -5,5 +5,6 @@ namespace EduSubscription.Application.Providers.Payment;
 
 public interface IPaymentProvider
 {
-    public Task<CreatedPaymentResponse?> CreatePaymentSlip(CreatePaymentRequest request);
+    public Task<CreatedPaymentResponse?> CreatePaymentSlip(CreatePaymentRequest slipRequest);
+    public Task<GetCustomerByDocumentNumberResponse?> GetCustomerByDocumentNumber(string documentNumber);
 }

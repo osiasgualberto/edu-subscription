@@ -1,9 +1,9 @@
-﻿PUT http://localhost:5218/api/members/482d160a-6b86-4202-a424-8f38c9196639
+﻿PUT http://localhost:5218/api/members/0dfecf52-4270-41d6-b1b3-96ff7db71c7b
 Content-Type: application/json
 Accept: application/json
 
 {
-  "firstName": "Zeca",
-  "lastName": "Urubu",
-  "documentNumber": "1115432893"
+  "firstName": "João",
+  "lastName": "Paulo Back",
+  "documentNumber": "11154328937"
 }

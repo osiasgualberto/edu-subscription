@@ -1,46 +1,35 @@
-﻿using EduSubscription.Application.Providers.Payment.Models;
-using EduSubscription.Application.Providers.Payment.Models.Requests;
-using EduSubscription.Application.Providers.Payment.Models.Responses;
-using EduSubscription.Infrastructure.Providers.Asaas.Contracts;
-using EduSubscription.Infrastructure.Providers.Asaas.Serialization.Resolvers;
+﻿using EduSubscription.Infrastructure.Providers.Asaas.Serialization.Abstractions;
+using EduSubscription.Infrastructure.Providers.Asaas.Serialization.Dtos;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace EduSubscription.Infrastructure.Providers.Asaas.Serialization;
 
 public class PaymentSerializer : IPaymentSerializer
 {
     private JsonSerializer _serializer = new();
-
-    private Dictionary<string, DefaultContractResolver> _resolvers = new()
+    private ILogger<PaymentSerializer> _logger;
+    
+    public PaymentSerializer(ILogger<PaymentSerializer> logger)
     {
-        { typeof(CreatePaymentRequest).Name, new CreatePaymentResponseResolver() },
-        { typeof(CreatedPaymentResponse).Name, new CreatedPaymentRequestResolver() }
-    };
-
-    public PaymentSerializer()
-    {
+        _logger = logger;
         _serializer.NullValueHandling = NullValueHandling.Ignore;
     }
 
-    public string Serialize<TPaymentModel>(TPaymentModel toBeSerialized) where TPaymentModel : PaymentModel
+    public string Serialize<TPaymentDto>(TPaymentDto toBeSerialized) where TPaymentDto : PaymentDto
     {
         using var memString = new StringWriter();
         using var jsonWriter = new JsonTextWriter(memString);
-        _resolvers.TryGetValue(toBeSerialized.GetType().Name, out var resolver);
-        if (resolver is null) resolver = new DefaultContractResolver();
-        _serializer.ContractResolver = resolver;
         _serializer.Serialize(jsonWriter, toBeSerialized);
+        _logger.LogDebug(memString.ToString());
         return memString.ToString();
     }
 
-    public TPaymentModel? Deserialize<TPaymentModel>(string toBeDeserialized) where TPaymentModel : PaymentModel
+    public TPaymentDto? Deserialize<TPaymentDto>(string toBeDeserialized) where TPaymentDto : PaymentDto
     {
         using var memString = new StringReader(toBeDeserialized);
         using var jsonReader = new JsonTextReader(memString);
-        _resolvers.TryGetValue(nameof(toBeDeserialized), out var resolver);
-        if (resolver is null) resolver = new DefaultContractResolver();
-        _serializer.ContractResolver = resolver;
-        return _serializer.Deserialize<TPaymentModel>(jsonReader);
+        _logger.LogDebug(memString.ToString());
+        return _serializer.Deserialize<TPaymentDto>(jsonReader);
     }
 }

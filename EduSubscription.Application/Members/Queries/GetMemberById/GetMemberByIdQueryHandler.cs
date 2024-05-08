@@ -19,7 +19,7 @@ public class GetMemberByIdQueryHandler : IRequestHandler<GetMemberByIdQuery, Res
     {
         var member = await _unitOfWork.MemberRepository.ReadById(request.Id);
         if (member is null) return Result.Fail<MemberViewModel>(MemberErrors.Member.MemberNotFound);
-        var memberViewModel = new MemberViewModel(member.Id, member.FirstName, member.LastName);
+        var memberViewModel = new MemberViewModel(member.Id, member.FirstName, member.LastName, member.DocumentNumber);
         return Result.Ok(memberViewModel);
     }
 }

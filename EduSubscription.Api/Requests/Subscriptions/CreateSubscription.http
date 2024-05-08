@@ -3,5 +3,6 @@ Content-Type: application/json
 
 {
   "idPlan": "15455BCC-36FD-4256-AF59-0C3BA6BAB3BA",
-  "idMember": "0DFECF52-4270-41D6-B1B3-96FF7DB71C7B"
+  "idMember": "a9debca2-17a2-4679-9359-3e57e9cd157f",
+  "value": 100.00
 }

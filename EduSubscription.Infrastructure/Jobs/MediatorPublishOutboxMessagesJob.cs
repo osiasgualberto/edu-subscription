@@ -25,7 +25,8 @@ public class MediatorPublishOutboxMessagesJob : BackgroundService
 
         var outboxMessages = context
             .OutboxMessages
-            .Where(o => !o.Processed);
+            .Where(o => !o.Processed)
+            .ToList();
 
         foreach (var outboxMessage in outboxMessages)
         {

@@ -13,4 +13,5 @@ public class CreateSubscriptionCommand : IRequest<Result<SubscriptionCreatedView
     }
     public Guid IdPlan { get; set; }
     public Guid IdMember { get; set; }
+    public decimal Value { get; set; }
 }

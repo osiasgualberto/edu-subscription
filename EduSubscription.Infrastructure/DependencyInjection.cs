@@ -11,6 +11,7 @@ using EduSubscription.Infrastructure.Providers.Asaas.Clients;
 using EduSubscription.Infrastructure.Providers.Asaas.Contracts;
 using EduSubscription.Infrastructure.Providers.Asaas.Options;
 using EduSubscription.Infrastructure.Providers.Asaas.Serialization;
+using EduSubscription.Infrastructure.Providers.Asaas.Serialization.Abstractions;
 using EduSubscription.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

@@ -17,7 +17,7 @@ public class GetAllMembersQueryHandler : IRequestHandler<GetAllMembersQuery, Lis
     {
         var members = await _unitOfWork.MemberRepository.ReadAll();
         return members
-            .Select(o => new MemberViewModel(o.Id, o.FirstName, o.LastName))
+            .Select(o => new MemberViewModel(o.Id, o.FirstName, o.LastName, o.DocumentNumber))
             .ToList();
     }
 }
