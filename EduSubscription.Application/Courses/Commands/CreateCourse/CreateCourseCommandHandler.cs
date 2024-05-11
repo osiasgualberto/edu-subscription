@@ -19,6 +19,7 @@ public class CreateCourseCommandHandler : IRequestHandler<CreateCourseCommand, R
     {
         var course = Course.Create(request.Name, request.Description);
         await _unitOfWork.CourseRepository.Add(course);
+        await _unitOfWork.Complete();
         var courseCreatedViewModel = new CourseCreatedViewModel(course.Id);
         return Result.Ok(courseCreatedViewModel);
     }

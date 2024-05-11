@@ -13,6 +13,12 @@ internal static class ApiRoutes
         public const string BaseMember = "members";
         public const string BaseMemberWithId = "members/{id:guid}";
     }
+    
+    internal static class Course
+    {
+        public const string BaseCourse = "courses";
+        public const string BaseCourseWithId = "courses/{id:guid}";
+    }
 
     internal static class Plan
     {

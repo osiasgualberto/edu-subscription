@@ -20,6 +20,7 @@ public class UpdateCourseCommandHandler : IRequestHandler<UpdateCourseCommand, R
         var course = await _unitOfWork.CourseRepository.ReadById(request.Id);
         if (course is null) return Result.Fail<CourseUpdatedViewModel>(CourseErrors.Course.CourseNotFound);
         course.Update(request.Name, request.Description);
+        await _unitOfWork.Complete();
         var courseUpdatedViewModel = new CourseUpdatedViewModel(course.Id);
         return Result.Ok(courseUpdatedViewModel);
     }
