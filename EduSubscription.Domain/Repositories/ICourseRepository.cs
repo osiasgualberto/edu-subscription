@@ -1,6 +1,9 @@
-﻿namespace EduSubscription.Repositories;
+﻿using EduSubscription.Core.Courses;
+using EduSubscription.Repositories.Contracts;
 
-public interface ICourseRepository
+namespace EduSubscription.Repositories;
+
+public interface ICourseRepository : IWritableRepository<Course>, IReadableRepository<Course>, IReadableAllRepository<Course>, IDeletableRepository
 {
     
 }

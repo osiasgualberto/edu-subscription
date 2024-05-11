@@ -8,6 +8,8 @@ public interface IUnitOfWork
     public IPlanRepository PlanRepository { get; set; }
     public ISubscriptionRepository SubscriptionRepository { get; set; }
     public IMemberRepository MemberRepository { get; set; }
+    public IPaymentRepository PaymentRepository { get; set; }
+    public ICourseRepository CourseRepository { get; set; }
     
     /// <summary>
     /// Completes a transaction.
