@@ -26,15 +26,16 @@ public class PaymentProvider : IPaymentProvider
     
     public async Task<CreatedPaymentResponse?> CreatePaymentSlip(CreatePaymentRequest request)
     {
-        var requestDto = new PostPaymentsRequestDto(request.Customer, "BOLETO", request.Value, request.Due);
+        var requestDto = new PostPaymentsRequestDto(request.Customer, "BOLETO", request.Value, request.Due, request.Installments);
         var paymentRequest = _serializer.Serialize(requestDto);
         var httpResponse = await _httpClient.Post(Resources.PaymentEndpoint, paymentRequest);
-        if (httpResponse.StatusCode != HttpStatusCode.Created) return default!;
+        if (httpResponse.StatusCode != HttpStatusCode.OK) return default!;
         var paymentResponseJson = await httpResponse.Content.ReadAsStringAsync();
         if (!paymentResponseJson.Any()) return default!;
         var paymentResponse = _serializer.Deserialize<PostPaymentsResponseDto>(paymentResponseJson);
         if (paymentResponse is null) return default!;
-        return new CreatedPaymentResponse(paymentResponse.Id);
+        _logger.LogDebug("Payment: {0}", paymentResponse.Id);
+        return new CreatedPaymentResponse(paymentResponse.Id, paymentResponse.Link);
     }
 
     public async Task<GetCustomerByDocumentNumberResponse?> GetCustomerByDocumentNumber(string documentNumber)
@@ -49,10 +50,9 @@ public class PaymentProvider : IPaymentProvider
         if (!customerResponseJson.Any()) return default!;
         var customerResponse = _serializer.Deserialize<GetCustomersResponseDto>(customerResponseJson);
         if (customerResponse is null) return default!;
-        _logger.LogDebug("Received customers: {0}", customerResponse.TotalCount);
         if (customerResponse.Customers.Count == 0) return default!;
         var foundCustomer = customerResponse.Customers.First();
-        _logger.LogDebug("Found customer: {0}-{1}", foundCustomer.Id, foundCustomer.Name);
+        _logger.LogDebug("Customer: {0} - {1}", foundCustomer.Id, foundCustomer.Name);
         return new GetCustomerByDocumentNumberResponse(foundCustomer.Id, foundCustomer.Name, "", "");
     }
 }

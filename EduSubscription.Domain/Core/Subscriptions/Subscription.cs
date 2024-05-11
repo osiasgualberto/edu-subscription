@@ -1,4 +1,5 @@
 ﻿using EduSubscription.Core.Members;
+using EduSubscription.Core.Payments;
 using EduSubscription.Core.Plans;
 using EduSubscription.Core.Subscriptions.Enumerations;
 using EduSubscription.Core.Subscriptions.Events;
@@ -8,14 +9,13 @@ namespace EduSubscription.Core.Subscriptions;
 
 public class Subscription : Entity
 {
-    private Subscription(ESubscriptionStatus status, DateOnly start, DateOnly end, Guid idPlan, Guid idMember, decimal value)
+    private Subscription(ESubscriptionStatus status, DateOnly start, DateOnly end, Guid idPlan, Guid idMember)
     {
         Status = status;
         Start = start;
         End = end;
         IdPlan = idPlan;
         IdMember = idMember;
-        Value = value;
     }
 
     /// <summary>
@@ -23,15 +23,14 @@ public class Subscription : Entity
     /// </summary>
     /// <param name="idPlan"></param>
     /// <param name="idMember"></param>
-    /// <param name="value"></param>
     /// <returns></returns>
-    public static Subscription Create(Guid idPlan, Guid idMember, decimal value)
+    public static Subscription Create(Guid idPlan, Guid idMember)
     {
         DateTime today = DateTime.Now;
         DateOnly start = new DateOnly(today.Year, today.Month, today.Day);
         DateOnly end = new DateOnly(today.Year, today.Month, today.Day);
-        Subscription subscription = new Subscription(ESubscriptionStatus.Pending, start, end, idPlan, idMember, value);
-        subscription.Raise(new SubscriptionCreatedEvent(subscription.Id, subscription.IdMember,  subscription.Value));
+        Subscription subscription = new Subscription(ESubscriptionStatus.Pending, start, end, idPlan, idMember);
+        subscription.Raise(new SubscriptionCreatedEvent(subscription.Id, subscription.IdMember, subscription.IdPlan));
         return subscription;
     }
     
@@ -39,7 +38,6 @@ public class Subscription : Entity
     public Plan Plan { get; private set; } = null!;
     public Guid IdMember { get; private set; }
     public Member Member { get; private set; } = null!;
-    public decimal Value { get; private set; }
     public ESubscriptionStatus Status { get; private set; }
     public DateOnly Start { get; private set; }
     public DateOnly End { get; private set; }

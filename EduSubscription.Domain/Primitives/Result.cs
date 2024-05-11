@@ -1,4 +1,6 @@
-﻿namespace EduSubscription.Primitives;
+﻿using MediatR;
+
+namespace EduSubscription.Primitives;
 
 /// <summary>
 /// Represents a expressive result for domain layer.
@@ -40,7 +42,7 @@ public class Result
 /// <summary>
 /// Represents a expressive result for domain layer.
 /// </summary>
-public class Result<TValue> : Result
+public class Result<TValue> : Result, IRequest
 {
     public TValue Value { get; set; }
     public Result(bool isSuccess, Error error, TValue value) : base(isSuccess, error)

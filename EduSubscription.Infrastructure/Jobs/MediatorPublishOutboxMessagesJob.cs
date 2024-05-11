@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using EduSubscription.Infrastructure.Persistence;
+﻿using EduSubscription.Infrastructure.Persistence;
 using EduSubscription.Primitives.Contracts;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;

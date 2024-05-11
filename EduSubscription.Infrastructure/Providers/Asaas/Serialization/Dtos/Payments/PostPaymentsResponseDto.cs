@@ -5,10 +5,8 @@ namespace EduSubscription.Infrastructure.Providers.Asaas.Serialization.Dtos.Paym
 
 public record PostPaymentsResponseDto : PaymentDto
 {
-    public PostPaymentsResponseDto(string id)
-    {
-        Id = id;
-    }
-    [JsonProperty("id")]
-    public string Id { get; set; }
+    [JsonProperty("id")] 
+    public string Id { get; set; } = string.Empty;
+    [JsonProperty("bankSlipUrl")]
+    public string Link { get; set; } = string.Empty;
 }

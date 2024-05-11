@@ -4,13 +4,13 @@ namespace EduSubscription.Core.Subscriptions.Events;
 
 public class SubscriptionCreatedEvent : IDomainEvent
 {
-    public SubscriptionCreatedEvent(Guid subscriptionId, Guid memberId, decimal value)
+    public SubscriptionCreatedEvent(Guid idSubscription, Guid idMember, Guid planId)
     {
-        SubscriptionId = subscriptionId;
-        MemberId = memberId;
-        Value = value;
+        IdSubscription = idSubscription;
+        IdMember = idMember;
+        PlanId = planId;
     }
-    public Guid SubscriptionId { get; set; }
-    public Guid MemberId { get; set; }
-    public decimal Value { get; set; }
+    public Guid IdSubscription { get; set; }
+    public Guid IdMember { get; set; }
+    public Guid PlanId { get; set; }
 }
