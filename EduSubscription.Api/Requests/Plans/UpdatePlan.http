@@ -1,9 +1,9 @@
-﻿PUT http://localhost:5218/api/plans/375191e5-2171-4ceb-88bd-882e3d90c42b
+﻿PUT http://localhost:5218/api/plans/26d46500-7087-40f4-a499-9d8bed34d12c
 Content-Type: application/json
 Accept: application/json
 
 {
-  "id": "375191e5-2171-4ceb-88bd-882e3d90c42b",
-  "duration": 6,
-  "description": "Mentoria .NET Start"
+  "id": "26d46500-7087-40f4-a499-9d8bed34d12c",
+  "description": "Boleto 12X",
+  "installments": 12
 }

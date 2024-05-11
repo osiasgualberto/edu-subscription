@@ -2,7 +2,6 @@
 Content-Type: application/json
 
 {
-  "idPlan": "15455BCC-36FD-4256-AF59-0C3BA6BAB3BA",
-  "idMember": "a9debca2-17a2-4679-9359-3e57e9cd157f",
-  "value": 100.00
+  "idPlan": "26d46500-7087-40f4-a499-9d8bed34d12c",
+  "idMember": "b5411e11-b513-4eb8-adfa-c1987745ee33"
 }
