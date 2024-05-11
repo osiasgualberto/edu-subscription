@@ -18,4 +18,6 @@ public class Lesson : Entity
     public float MinutesDuration { get; private set; }
     public Guid IdCourse { get; private set; }
     public Course Course { get; private set; } = null!;
+    public Guid IdModule { get; private set; }
+    public Module Module { get; private set; } = null!;
 }
