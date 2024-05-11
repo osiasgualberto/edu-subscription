@@ -15,7 +15,7 @@ public class PaymentConfiguration : BaseConfiguration<Payment>
         builder.Property(o => o.PaymentStatus).IsRequired();
         builder.Property(o => o.Value).IsRequired();
         builder.Property(o => o.DueDate).IsRequired();
-        builder.Property(o => o.ProcessedDate).IsRequired(false);
+        builder.Property(o => o.LastProcessedDate).IsRequired(false);
         builder.Property(o => o.Link).IsRequired(false);
         builder.Property(o => o.Value).HasPrecision(15, 4);
     }
