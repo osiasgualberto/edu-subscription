@@ -1,0 +1,7 @@
+﻿POST http://localhost:5218/api/courses
+Content-Type: application/json
+
+{
+  "name": "Programação Básica",
+  "description": "Curso básico de programação que engloba conceitos como o de algoritmos e estruturas de dados."
+}

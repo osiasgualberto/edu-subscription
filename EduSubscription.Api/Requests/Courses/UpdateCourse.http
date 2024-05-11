@@ -1,0 +1,7 @@
+﻿PUT http://localhost:5218/api/courses/123
+Content-Type: application/json
+
+{
+  "name": "Sistemas Operacionais",
+  "description": "Curso básico de sistemas operacionais que engloba conceitos como o gerenciamento processos e de memória, sistemas de arquivos e segurança."
+}
