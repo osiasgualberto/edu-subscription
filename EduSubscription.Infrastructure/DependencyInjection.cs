@@ -59,7 +59,8 @@ public static class DependencyInjection
             .AddScoped<ISubscriptionRepository, SubscriptionRepository>()
             .AddScoped<IPlanRepository, PlanRepository>()
             .AddScoped<IMemberRepository, MemberRepository>()
-            .AddScoped<IPaymentRepository, PaymentRepository>();
+            .AddScoped<IPaymentRepository, PaymentRepository>()
+            .AddScoped<ICourseRepository, CourseRepository>();
         return services;
     }
 
