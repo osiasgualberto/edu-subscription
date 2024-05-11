@@ -30,7 +30,7 @@ public class CreateSubscriptionCommandHandler : IRequestHandler<CreateSubscripti
         {
             return Result.Fail<SubscriptionCreatedViewModel>(MemberErrors.Member.MemberNotFound);
         }
-        var subscription = Subscription.Create(plan.Id, member.Id, request.Value);
+        var subscription = Subscription.Create(plan.Id, member.Id);
         await _unitOfWork.SubscriptionRepository.Add(subscription);
         await _unitOfWork.Complete();
         return Result.Ok(new SubscriptionCreatedViewModel(subscription.Id));

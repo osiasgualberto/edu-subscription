@@ -6,13 +6,13 @@ namespace EduSubscription.Application.Plans.Commands.UpdatePlan;
 
 public class UpdatePlanCommand : IRequest<Result<PlanUpdatedViewModel>>
 {
-    public UpdatePlanCommand(Guid id, string description, int duration)
+    public UpdatePlanCommand(Guid id, string description, int installments)
     {
         Id = id;
         Description = description;
-        Duration = duration;
+        Installments = installments;
     }
     public Guid Id { get; set; }
     public string Description { get; set; }
-    public int Duration { get; set; }
+    public int Installments { get; set; }
 }

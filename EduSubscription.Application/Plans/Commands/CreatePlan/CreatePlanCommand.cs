@@ -4,13 +4,13 @@ using MediatR;
 
 namespace EduSubscription.Application.Plans.Commands.CreatePlan;
 
-public class CreatePlanCommand : IRequest<Result<PlanCreatedViewModel>>
-{
-    public CreatePlanCommand(string description, int durationInMonths)
+public class CreatePlanCommand : IRequest<Result<PlanCreatedViewModel>>{
+
+    public CreatePlanCommand(string description, int installments)
     {
         Description = description;
-        DurationInMonths = durationInMonths;
+        Installments = installments;
     }
     public string Description { get; set; }
-    public int DurationInMonths { get; set; }
+    public int Installments { get; set; }
 }

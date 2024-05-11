@@ -19,7 +19,7 @@ public class UpdatePlanCommandHandler : IRequestHandler<UpdatePlanCommand, Resul
     {
         var plan = await _unitOfWork.PlanRepository.ReadById(request.Id);
         if (plan is null) return Result.Fail<PlanUpdatedViewModel>(PlanErrors.Plan.PlanNotFound);
-        plan.Update(request.Description, request.Duration);
+        plan.Update(request.Description, request.Installments);
         await _unitOfWork.Complete();
         var planUpdatedViewModel = new PlanUpdatedViewModel(plan.Id);
         return Result.Ok(planUpdatedViewModel);

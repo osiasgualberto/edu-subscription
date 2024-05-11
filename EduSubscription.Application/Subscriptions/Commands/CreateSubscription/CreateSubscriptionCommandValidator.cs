@@ -8,6 +8,5 @@ public class CreateSubscriptionCommandValidator : AbstractValidator<CreateSubscr
     public CreateSubscriptionCommandValidator()
     {
         RuleFor(o => o.IdPlan).NotEmpty();
-        RuleFor(o => o.Value).GreaterThan(1).NotEmpty();
     }
 }

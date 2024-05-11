@@ -1,11 +1,11 @@
 ﻿using EduSubscription.Primitives;
 using MediatR;
 
-namespace EduSubscription.Application.Members.Commands.DeleteMember;
+namespace EduSubscription.Application.Courses.Commands.DeleteCourse;
 
-public class DeleteMemberCommand : IRequest<Result>
+public class DeleteCourseCommand : IRequest<Result>
 {
-    public DeleteMemberCommand(Guid id)
+    public DeleteCourseCommand(Guid id)
     {
         Id = id;
     }
