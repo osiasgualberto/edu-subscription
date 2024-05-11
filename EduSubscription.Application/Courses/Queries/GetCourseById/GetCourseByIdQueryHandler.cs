@@ -2,10 +2,11 @@
 using EduSubscription.Core.Courses.Errors;
 using EduSubscription.Primitives;
 using EduSubscription.Repositories;
+using MediatR;
 
 namespace EduSubscription.Application.Courses.Queries.GetCourseById;
 
-public class GetCourseByIdQueryHandler
+public class GetCourseByIdQueryHandler : IRequestHandler<GetCourseByIdQuery, Result<CourseViewModel>>
 {
     private readonly IUnitOfWork _unitOfWork;
 

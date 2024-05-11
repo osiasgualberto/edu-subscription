@@ -1,0 +1,2 @@
+﻿GET http://localhost:5218/api/courses/39b8c3fb-6481-4169-a4e8-ebd9c1185024
+Accept: application/json

@@ -2,6 +2,8 @@
 using EduSubscription.Application.Courses.Commands.CreateCourse;
 using EduSubscription.Application.Courses.Commands.DeleteCourse;
 using EduSubscription.Application.Courses.Commands.UpdateCourse;
+using EduSubscription.Application.Courses.Queries.GetAllCourses;
+using EduSubscription.Application.Courses.Queries.GetCourseById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,6 +46,23 @@ public class CourseController : ApiController
     {
         var result = await _mediator.Send(new DeleteCourseCommand(id));
         return result.IsSuccess ? NoContent() : BadRequest(result.Error);
+    }
+    
+    [HttpGet(ApiRoutes.Course.BaseCourseWithId)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> GetCourseById(Guid id)
+    {
+        var result = await _mediator.Send(new GetCourseByIdQuery(id));
+        return result.IsSuccess ? Ok(result.Value) : NotFound(result.Error);
+    }
+    
+    [HttpGet(ApiRoutes.Course.BaseCourse)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetAllCourses()
+    {
+        var view = await _mediator.Send(new GetAllCoursesQuery());
+        return Ok(view);    
     }
  
 }
