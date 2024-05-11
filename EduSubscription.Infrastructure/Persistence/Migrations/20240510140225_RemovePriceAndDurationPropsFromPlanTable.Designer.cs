@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EduSubscription.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240505130339_CreateFieldValueAtSubscriptionTable")]
-    partial class CreateFieldValueAtSubscriptionTable
+    [Migration("20240510140225_RemovePriceAndDurationPropsFromPlanTable")]
+    partial class RemovePriceAndDurationPropsFromPlanTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -72,14 +72,14 @@ namespace EduSubscription.Infrastructure.Persistence.Migrations
                     b.Property<Guid>("IdSubscription")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime?>("LastProcessedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Link")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PaymentStatus")
                         .HasColumnType("int");
-
-                    b.Property<DateTime?>("ProcessedDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("Value")
                         .HasPrecision(15, 4)
@@ -102,7 +102,7 @@ namespace EduSubscription.Infrastructure.Persistence.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<int>("DurationInMonths")
+                    b.Property<int>("Installments")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -130,10 +130,6 @@ namespace EduSubscription.Infrastructure.Persistence.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Value")
-                        .HasPrecision(15, 4)
-                        .HasColumnType("decimal(15,4)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("IdMember");
@@ -156,7 +152,7 @@ namespace EduSubscription.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 5, 10, 3, 39, 360, DateTimeKind.Local).AddTicks(4340));
+                        .HasDefaultValue(new DateTime(2024, 5, 10, 11, 2, 25, 435, DateTimeKind.Local).AddTicks(1548));
 
                     b.Property<bool>("Processed")
                         .HasColumnType("bit");
