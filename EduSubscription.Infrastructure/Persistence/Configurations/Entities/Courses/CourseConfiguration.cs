@@ -10,6 +10,8 @@ public class CourseConfiguration : BaseConfiguration<Course>
     {
         base.Configure(builder);
         builder.ToTable("tbl_Courses");
+        builder.HasMany(o => o.Lessons).WithOne(o => o.Course).HasForeignKey(o => o.IdCourse).IsRequired()
+            .OnDelete(DeleteBehavior.Restrict);
         builder.Property(o => o.Name).IsRequired();
         builder.Property(o => o.Description).IsRequired();
         builder.Property(o => o.Cover).IsRequired(false);

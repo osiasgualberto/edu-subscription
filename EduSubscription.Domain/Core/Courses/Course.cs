@@ -37,5 +37,6 @@ public class Course : Entity
     public string Name { get; private set; }
     public string Description { get; private set; }
     public string Cover { get; private set; }
+    public List<Lesson> Lessons { get; private set; } = null!;
     public DateTime CreatedAt { get; private set; }
 }
