@@ -17,6 +17,7 @@ internal static class ApiRoutes
     internal static class Course
     {
         public const string BaseCourse = "courses";
+        public const string BaseCourseLessonWithId = "courses/{id:guid}/lessons";
         public const string BaseCourseWithId = "courses/{id:guid}";
     }
 

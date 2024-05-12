@@ -10,8 +10,6 @@ public class LessonConfiguration : BaseConfiguration<Lesson>
     {
         base.Configure(builder);
         builder.ToTable("tbl_Lessons");
-        builder.HasOne(o => o.Module).WithMany().HasForeignKey(o => o.IdModule).IsRequired()
-            .OnDelete(DeleteBehavior.Restrict);
         builder.Property(o => o.Description).IsRequired();
         builder.Property(o => o.Name).IsRequired();
     }

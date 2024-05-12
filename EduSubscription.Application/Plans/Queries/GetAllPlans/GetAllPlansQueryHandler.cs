@@ -20,7 +20,7 @@ public class GetAllPlansQueryHandler : IRequestHandler<GetAllPlansQuery, List<Pl
         var plans = await _unitOfWork.PlanRepository
             .ReadAll();
         var view = plans
-            .Select(o => new PlanViewModel(o.Id, o.Description, o.Installments))
+            .Select(o => new PlanViewModel(o.Id, o.Description, o.MonthDuration))
             .ToList();
         return view;
     }

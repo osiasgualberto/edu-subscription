@@ -33,6 +33,15 @@ public class Course : Entity
         Name = name;
         Description = description;
     }
+
+    /// <summary>
+    /// Adds a new lesson to the course.
+    /// </summary>
+    /// <param name="lesson"></param>
+    public void AddLesson(Lesson lesson)
+    {
+        Lessons.Add(lesson);
+    }
     
     public string Name { get; private set; }
     public string Description { get; private set; }

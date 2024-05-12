@@ -4,7 +4,7 @@ using MediatR;
 
 namespace EduSubscription.Application.Courses.Queries.GetCourseById;
 
-public class GetCourseByIdQuery : IRequest<Result<CourseViewModel>>
+public class GetCourseByIdQuery : IRequest<Result<CourseDetailedViewModel>>
 {
     public GetCourseByIdQuery(Guid id)
     {

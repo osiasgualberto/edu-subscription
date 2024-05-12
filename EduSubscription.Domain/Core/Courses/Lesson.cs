@@ -4,20 +4,23 @@ namespace EduSubscription.Core.Courses;
 
 public class Lesson : Entity
 {
-    public Lesson(string name, string description, string link, float minutesDuration, Guid idCourse)
+    private Lesson(Guid idCourse, string name, string description, string link)
     {
         Name = name;
         Description = description;
         Link = link;
-        MinutesDuration = minutesDuration;
         IdCourse = idCourse;
     }
+    
+    public static Lesson Create(Guid idCourse, string name, string description)
+    {
+        var lesson = new Lesson(idCourse, name, description, "");
+        return lesson;
+    }
+    
+    public Guid IdCourse { get; private set; }
+    public Course Course { get; private set; } = null!;
     public string Name { get; private set; }
     public string Description { get; private set; }
     public string Link { get; private set; }
-    public float MinutesDuration { get; private set; }
-    public Guid IdCourse { get; private set; }
-    public Course Course { get; private set; } = null!;
-    public Guid IdModule { get; private set; }
-    public Module Module { get; private set; } = null!;
 }

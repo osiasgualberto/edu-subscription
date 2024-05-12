@@ -20,12 +20,12 @@ public class CourseRepository : ICourseRepository
 
     public async Task<Course?> ReadById(Guid id)
     {
-        return await _appDbContext.Courses.SingleOrDefaultAsync(o => o.Id == id);
+        return await _appDbContext.Courses.Include(o => o.Lessons).SingleOrDefaultAsync(o => o.Id == id);
     }
 
     public async Task<List<Course>> ReadAll()
     {
-        return await _appDbContext.Courses.ToListAsync();
+        return await _appDbContext.Courses.Include(o => o.Lessons).ToListAsync();
     }
 
     public async Task<bool> Delete(Guid id)

@@ -1,5 +1,6 @@
 ﻿using EduSubscription.Api.Abstractions;
 using EduSubscription.Application.Courses.Commands.CreateCourse;
+using EduSubscription.Application.Courses.Commands.CreateCourseLesson;
 using EduSubscription.Application.Courses.Commands.DeleteCourse;
 using EduSubscription.Application.Courses.Commands.UpdateCourse;
 using EduSubscription.Application.Courses.Queries.GetAllCourses;
@@ -19,6 +20,16 @@ public class CourseController : ApiController
     }
     
     private readonly IMediator _mediator;
+    
+    [HttpPost(ApiRoutes.Course.BaseCourseLessonWithId)]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> PostCourseLesson(Guid id, [FromBody] CreateCourseLessonCommand createCourseLessonCommand)
+    {
+        createCourseLessonCommand.IdCourse = id;
+        var result = await _mediator.Send(createCourseLessonCommand);
+        return result.IsSuccess ? CreatedAtAction(nameof(PostCourseLesson), value: result.Value) : BadRequest(result.Error);
+    }
     
     [HttpPost(ApiRoutes.Course.BaseCourse)]
     [ProducesResponseType(StatusCodes.Status201Created)]

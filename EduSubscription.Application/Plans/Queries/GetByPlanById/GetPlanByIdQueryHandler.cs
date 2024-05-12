@@ -20,7 +20,7 @@ public class GetPlanByIdQueryHandler : IRequestHandler<GetPlanByIdQuery, Result<
     {
         var plan = await _unitOfWork.PlanRepository.ReadById(request.Id);
         if (plan is null) return Result.Fail<PlanViewModel>(PlanErrors.Plan.PlanNotFound);
-        var planViewModel = new PlanViewModel(plan.Id, plan.Description, plan.Installments);
+        var planViewModel = new PlanViewModel(plan.Id, plan.Description, plan.MonthDuration);
         return Result.Ok(planViewModel);
     }
 }

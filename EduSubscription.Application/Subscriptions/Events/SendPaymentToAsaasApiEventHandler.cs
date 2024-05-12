@@ -49,7 +49,7 @@ public class SendPaymentToAsaasApiEventHandler : IDomainEventHandler<Subscriptio
         var paymentRequest = new CreatePaymentRequest(
             customerFromApi.ExternalId, 
             payment.Value,
-            plan.Installments,
+            plan.MonthDuration,
             DateTime.Today.AddDays(1), 
             "BOLETO"
         );

@@ -4,14 +4,14 @@ namespace EduSubscription.Core.Plans;
 
 public class Plan : Entity
 {
-    public Plan(string description, int installments)
+    public Plan(string description, int monthDuration)
     {
         Description = description;
-        Installments = installments;
+        MonthDuration = monthDuration;
     }
     
     public string Description { get; private set; }
-    public int Installments { get; private set; }
+    public int MonthDuration { get; private set; }
 
     /// <summary>
     /// Updates the current plan object.
@@ -21,7 +21,7 @@ public class Plan : Entity
     public void Update(string description, int installments)
     {
         Description = description;
-        Installments = installments;
+        MonthDuration = installments;
     }
     
 }

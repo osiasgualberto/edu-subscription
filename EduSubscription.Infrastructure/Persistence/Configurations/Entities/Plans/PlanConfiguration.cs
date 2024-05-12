@@ -11,6 +11,6 @@ public class PlanConfiguration : BaseConfiguration<Plan>
         base.Configure(builder);
         builder.ToTable("tbl_Plans");
         builder.Property(o => o.Description).IsRequired().HasMaxLength(200);
-        builder.Property(o => o.Installments).IsRequired();
+        builder.Property(o => o.MonthDuration).IsRequired();
     }
 }

@@ -3,4 +3,4 @@ using MediatR;
 
 namespace EduSubscription.Application.Courses.Queries.GetAllCourses;
 
-public class GetAllCoursesQuery : IRequest<List<CourseViewModel>>;
+public class GetAllCoursesQuery : IRequest<List<CourseDetailedViewModel>>;

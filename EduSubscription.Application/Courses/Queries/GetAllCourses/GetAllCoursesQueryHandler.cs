@@ -4,7 +4,7 @@ using MediatR;
 
 namespace EduSubscription.Application.Courses.Queries.GetAllCourses;
 
-public class GetAllCoursesQueryHandler : IRequestHandler<GetAllCoursesQuery, List<CourseViewModel>>
+public class GetAllCoursesQueryHandler : IRequestHandler<GetAllCoursesQuery, List<CourseDetailedViewModel>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -13,11 +13,11 @@ public class GetAllCoursesQueryHandler : IRequestHandler<GetAllCoursesQuery, Lis
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<List<CourseViewModel>> Handle(GetAllCoursesQuery request, CancellationToken cancellationToken)
+    public async Task<List<CourseDetailedViewModel>> Handle(GetAllCoursesQuery request, CancellationToken cancellationToken)
     {
         var courses = await _unitOfWork.CourseRepository.ReadAll();
         return courses
-            .Select(o => new CourseViewModel(o.Id, o.Name, o.Description))
+            .Select(o => new CourseDetailedViewModel(o.Id, o.Name, o.Description, o.Lessons.Select(l => new LessonViewModel(l.Name, l.Description)).ToList()))
             .ToList();
     }
 }
